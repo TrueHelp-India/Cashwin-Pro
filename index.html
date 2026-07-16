@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lucky Draw Pro</title>
+    
+    <!-- PERFORMANCE OPTIMIZATIONS -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- PURE CSS FOR GUARANTEED LAYOUT -->
+    <style>
+        /* Global Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f3f4f6; display: flex; justify-content: center; overflow-x: hidden; width: 100%; }
+        .hidden { display: none !important; }
+
+        /* Main App Container */
+        .app-container { width: 100%; max-width: 420px; background-color: #f9fafb; min-height: 100vh; position: relative; padding-bottom: 80px; box-shadow: 0 0 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+
+        /* Full Screen Loader */
+        .loader-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; z-index: 999; max-width: 420px; margin: 0 auto; }
+        .spinner { width: 45px; height: 45px; border: 4px solid #e5e7eb; border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* AUTH SCREEN */
+        .auth-screen { padding: 40px 25px; display: flex; flex-direction: column; justify-content: center; flex: 1; background: white; min-height: 100vh; }
+        .logo-box { text-align: center; margin-bottom: 40px; }
+        .logo-icon { width: 75px; height: 75px; background: #eff6ff; border-radius: 20px; display: flex; justify-content: center; align-items: center; color: #3b82f6; font-size: 32px; margin: 0 auto 15px; box-shadow: 0 4px 15px rgba(59,130,246,0.1); }
+        .logo-box h1 { font-size: 26px; font-weight: 800; color: #111827; }
+        .logo-box p { font-size: 14px; color: #6b7280; margin-top: 5px; }
+
+        .input-group { position: relative; margin-bottom: 16px; width: 100%; }
+        .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+        .form-input { width: 100%; padding: 16px 15px 16px 50px; border: 1.5px solid #e5e7eb; border-radius: 14px; font-size: 15px; background: #f9fafb; outline: none; transition: 0.3s; }
+        .form-input:focus { border-color: #3b82f6; background: white; box-shadow: 0 0 0 4px rgba(59,130,246,0.1); }
+        
+        .btn-primary { width: 100%; padding: 16px; border: none; border-radius: 14px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(37,99,235,0.25); margin-top: 5px; transition: 0.2s; }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 5px 15px rgba(16,185,129,0.25); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); box-shadow: 0 5px 15px rgba(239,68,68,0.25); }
+        .auth-switch { text-align: center; margin-top: 25px; font-size: 14px; color: #6b7280; font-weight: 500; }
+        .auth-switch span { color: #3b82f6; font-weight: 700; cursor: pointer; }
+
+        /* HEADER */
+        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 25px 20px 45px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 46px; height: 46px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .user-info p { font-size: 12px; color: #bfdbfe; font-weight: 500; }
+        .user-info h2 { font-size: 18px; font-weight: 700; margin: 2px 0; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .uid-badge { background: rgba(0,0,0,0.2); padding: 3px 8px; border-radius: 10px; font-size: 10px; display: inline-block; }
+        
+        .wallet-brief { background: rgba(255,255,255,0.15); padding: 10px 15px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.2); text-align: right; cursor: pointer; backdrop-filter: blur(5px); }
+        .wallet-brief p { font-size: 11px; color: #bfdbfe; font-weight: 500; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+        .wallet-brief h3 { font-size: 20px; font-weight: 800; margin-top: 2px; }
+
+        /* HOME SCREEN & CARDS */
+        .screen-content { padding: 0 20px; margin-top: -25px; position: relative; z-index: 20; }
+        .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
+        
+        .tournament-card { background: white; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #f3f4f6; }
+        .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .live-badge { background: rgba(255,255,255,0.25); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; }
+        .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 5px #ef4444; }
+        .t-header h3 { font-size: 22px; font-weight: 800; margin-top: 8px; }
+        .t-header i { font-size: 40px; opacity: 0.4; }
+        
+        .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 10px; font-size: 14px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        
+        .t-body { padding: 24px; }
+        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .prize-info label, .fee-info label { font-size: 12px; color: #6b7280; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 4px;}
+        .prize-info h2 { font-size: 28px; font-weight: 900; color: #111827; }
+        .fee-info { text-align: right; }
+        .fee-box { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 8px 16px; border-radius: 10px; font-weight: 800; font-size: 18px; display: inline-block; }
+        
+        .progress-box { margin-bottom: 24px; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #4b5563; margin-bottom: 8px; }
+        .progress-bar { width: 100%; height: 8px; background: #f3f4f6; border-radius: 10px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 10px; transition: width 0.5s; }
+        
+        .btn-join { width: 100%; padding: 18px; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: white; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.2s; }
+        .btn-join:active { transform: scale(0.98); }
+        .btn-join:disabled { background: #9ca3af; cursor: not-allowed; box-shadow: none; }
+
+        .champion-card { background: white; border-radius: 16px; padding: 16px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; margin-bottom: 15px; }
+        .champ-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #d97706; font-size: 20px; margin-right: 15px; border: 1px solid #fcd34d; }
+        .champ-info { flex: 1; }
+        .champ-info h4 { font-size: 15px; font-weight: 700; color: #111827; }
+        .champ-info p { font-size: 12px; color: #6b7280; margin-top: 2px; font-weight: 500; }
+        .champ-prize { text-align: right; }
+        .champ-prize h4 { font-size: 15px; font-weight: 800; color: #10b981; }
+        .champ-prize p { font-size: 10px; color: #9ca3af; font-weight: 500; margin-top: 2px; }
+
+        /* WALLET & REFERRAL SCREENS */
+        .wallet-screen-padding { padding: 20px; }
+        
+        /* UPDATED: Total Balance Card Height Reduced */
+        .balance-card-main { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-radius: 20px; padding: 20px; text-align: center; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 20px; position: relative; overflow: hidden; }
+        .balance-card-main.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .balance-card-main i { position: absolute; right: -20px; bottom: -20px; font-size: 100px; opacity: 0.05; }
+        .balance-card-main p { font-size: 11px; color: #d1d5db; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; position: relative; z-index: 2;}
+        .balance-card-main h2 { font-size: 32px; font-weight: 900; position: relative; z-index: 2; word-break: break-all;}
+
+        .tabs-container { display: flex; background: #e5e7eb; padding: 6px; border-radius: 16px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; text-align: center; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #6b7280; cursor: pointer; transition: 0.3s; }
+        .tab-btn.active { background: white; color: #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        .action-card { background: white; border-radius: 20px; padding: 25px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; margin-bottom: 25px; }
+        .upi-info-box { background: #eff6ff; border: 1px dashed #93c5fd; border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        .upi-info-box p { font-size: 12px; color: #4b5563; font-weight: 500; margin-bottom: 10px; }
+        
+        /* NEW: QR CODE STYLES */
+        .qr-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 15px; background: white; border-radius: 12px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; }
+        .qr-image { width: 100%; height: 100%; object-fit: contain; display: none; }
+        .qr-loader { width: 30px; height: 30px; border: 3px solid #e5e7eb; border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
+
+        .copy-box { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px 15px; border-radius: 10px; font-weight: 600; color: #111827; font-size: 13px; cursor: pointer; width: 100%; word-break: break-all; }
+        .copy-box i { color: #3b82f6; font-size: 16px; }
+        
+        .info-alert { background: #fff7ed; border: 1px solid #ffedd5; padding: 15px; border-radius: 12px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+        .info-alert i { color: #f97316; font-size: 18px; margin-top: 2px; }
+        .info-alert p { font-size: 12px; color: #9a3412; font-weight: 500; line-height: 1.5; }
+
+        /* HISTORY LISTS */
+        .history-list { background: white; border-radius: 20px; padding: 10px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; min-height: 250px; }
+        .h-item { display: flex; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid #f3f4f6; }
+        .h-item:last-child { border-bottom: none; }
+        .h-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 18px; margin-right: 15px; flex-shrink: 0; border: 1px solid #f3f4f6; }
+        .h-icon.deposit, .h-icon.refer { background: #ecfdf5; color: #10b981; }
+        .h-icon.withdraw { background: #fef2f2; color: #ef4444; }
+        .h-icon.reject { background: #f3f4f6; color: #6b7280; } 
+        .h-details { flex: 1; }
+        .h-details h4 { font-size: 15px; font-weight: 700; color: #111827; }
+        .h-details p { font-size: 11px; color: #9ca3af; margin-top: 4px; font-weight: 500; display: inline-block;}
+        .h-details .remark { color: #ef4444; font-size: 10px; font-weight: 600; margin-top: 4px; background: #fef2f2; padding: 2px 6px; border-radius: 4px; display: inline-block;}
+        
+        .badge-status { padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 4px; display: inline-block; }
+        .badge-pending { background: #fef3c7; color: #d97706; }
+        .badge-reject { background: #fef2f2; color: #ef4444; }
+
+        .h-amount { text-align: right; margin-left: 10px; }
+        .h-amount h4 { font-size: 16px; font-weight: 800; }
+        .h-amount.plus { color: #10b981; }
+        .h-amount.minus { color: #ef4444; }
+        .h-amount.neutral { color: #6b7280; text-decoration: line-through; }
+
+        .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 0; }
+        .empty-state i { font-size: 40px; color: #e5e7eb; margin-bottom: 15px; }
+        .empty-state p { font-size: 14px; color: #9ca3af; font-weight: 500; }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-top: 1px solid #f3f4f6; display: flex; justify-content: space-around; padding: 12px 0 15px; z-index: 100; box-shadow: 0 -5px 20px rgba(0,0,0,0.03); }
+        .nav-link { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #9ca3af; font-size: 10px; font-weight: 600; cursor: pointer; width: 20%; transition: 0.3s; }
+        .nav-link i { font-size: 20px; transition: 0.3s; }
+        .nav-link.active { color: #3b82f6; }
+        .nav-link.active i { transform: translateY(-4px); text-shadow: 0 4px 10px rgba(59,130,246,0.3); }
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <!-- Loader -->
+    <div id="loader" class="loader-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- 1. AUTH SCREEN -->
+    <div id="authScreen" class="auth-screen">
+        <div class="logo-box">
+            <div class="logo-icon"><i class="fas fa-trophy"></i></div>
+            <h1>Lucky Draw Pro</h1>
+            <p>Your daily chance to win big!</p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div class="input-group"><i class="fas fa-phone"></i><input type="number" id="loginMobile" placeholder="Mobile Number" class="form-input"></div>
+            <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="loginPassword" placeholder="Password" class="form-input"></div>
+            <button onclick="loginUser()" class="btn-primary">Sign In Securely</button>
+            <p class="auth-switch">Don't have an account? <span onclick="toggleAuth()">Create one</span></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="hidden">
+            <div class="input-group"><i class="fas fa-user"></i><input type="text" id="regName" placeholder="Full Name" class="form-input"></div>
+            <div class="input-group"><i class="fas fa-phone"></i><input type="number" id="regMobile" placeholder="Mobile Number" class="form-input"></div>
+            <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="regEmail" placeholder="Email Address" class="form-input"></div>
+            <div class="input-group"><i class="fas fa-user-tag"></i><input type="text" id="regReferral" placeholder="Referral Code (Optional)" class="form-input"></div>
+            <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="regPassword" placeholder="Create Password" class="form-input"></div>
+            
+            <button onclick="registerUser()" class="btn-primary btn-success">Create Account</button>
+            <p class="auth-switch">Already registered? <span onclick="toggleAuth()">Sign In</span></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT (Hidden till login) -->
+    <div id="mainApp" class="hidden" style="flex: 1; flex-direction: column;">
+        
+        <!-- Header -->
+        <div class="app-header" id="appHeader">
+            <div class="user-profile">
+                <div class="avatar"><i class="fas fa-user text-white"></i></div>
+                <div class="user-info">
+                    <p>Welcome back,</p>
+                    <h2 id="userName">User Name</h2>
+                    <span class="uid-badge">UID: <span id="userUID"></span></span>
+                </div>
+            </div>
+            <div class="wallet-brief" onclick="switchTab('wallet')">
+                <p><i class="fas fa-wallet"></i> Balance</p>
+                <h3>₹<span id="headerBalance">0</span></h3>
+            </div>
+        </div>
+
+        <!-- 2. HOME SCREEN (MATCHES) -->
+        <div id="homeScreen" class="screen-content">
+            <div class="tournament-card">
+                <div class="t-header">
+                    <div>
+                        <div class="live-badge"><div class="live-dot"></div> LIVE NOW</div>
+                        <h3>Mega Draw</h3>
+                    </div>
+                    <i class="fas fa-gem"></i>
+                </div>
+                
+                <div class="timer-box">
+                    <i class="fas fa-stopwatch"></i> Ends In: <span id="countdownTimer">Loading...</span>
+                </div>
+                
+                <div class="t-body">
+                    <div class="flex-row">
+                        <div class="prize-info">
+                            <label>Total Prize Pool</label>
+                            <h2>₹<span id="prizePool">--</span></h2>
+                        </div>
+                        <div class="fee-info">
+                            <label>Entry Fee</label>
+                            <div class="fee-box">₹<span id="ticketPrice">--</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-box">
+                        <div class="progress-labels">
+                            <span>Joined: <span id="currentJoined">0</span></span>
+                            <span>Limit: <span id="participants">--</span></span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+                    </div>
+                    
+                    <button id="btnJoinTour" onclick="joinTournament()" class="btn-join">
+                        JOIN TOURNAMENT <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="section-title">Recent Champions</h3>
+            <div class="champion-card">
+                <div class="champ-icon"><i class="fas fa-trophy"></i></div>
+                <div class="champ-info">
+                    <h4>Ranjan Kumar</h4>
+                    <p>UID: 467592 • Mega Draw</p>
+                </div>
+                <div class="champ-prize">
+                    <h4>+ ₹2,000</h4>
+                    <p>Yesterday</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. WALLET SCREEN -->
+        <div id="walletScreen" class="hidden wallet-screen-padding">
+            <div class="balance-card-main">
+                <i class="fas fa-wallet"></i>
+                <p>Total Available Balance</p>
+                <h2>₹<span id="walletBalance">0</span></h2>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tab-btn active" id="tabDeposit" onclick="switchWalletTab('deposit')">Add Funds</div>
+                <div class="tab-btn" id="tabWithdraw" onclick="switchWalletTab('withdraw')">Withdraw</div>
+            </div>
+
+            <div id="depositSection" class="action-card">
+                <div class="upi-info-box">
+                    <!-- NEW: DYNAMIC QR CODE WRAPPER -->
+                    <div class="qr-wrapper">
+                        <div class="qr-loader" id="qrLoader"></div>
+                        <img id="upiQRCode" class="qr-image" alt="UPI QR Code" onload="document.getElementById('qrLoader').style.display='none'; this.style.display='block';">
+                    </div>
+                    <p>Transfer exactly on this UPI ID</p>
+                    <div class="copy-box" onclick="copyUPI()"><span id="adminUPI">Loading...</span><i class="far fa-copy"></i></div>
+                </div>
+                <div class="input-group"><input type="number" id="depAmount" placeholder="Amount to deposit (₹)" class="form-input"></div>
+                <div class="input-group"><input type="text" id="depUTR" placeholder="Enter 12-digit UTR No." class="form-input"></div>
+                <button onclick="submitDeposit()" class="btn-primary btn-success"><i class="fas fa-plus-circle"></i> Submit Request</button>
+            </div>
+
+            <div id="withdrawSection" class="hidden action-card">
+                <div class="info-alert"><i class="fas fa-info-circle"></i><p>Money will be transferred to your provided UPI ID.</p></div>
+                <div class="input-group"><input type="number" id="withAmount" placeholder="Withdrawal Amount (₹)" class="form-input"></div>
+                <div class="input-group"><input type="text" id="withUPI" placeholder="Enter your UPI ID" class="form-input"></div>
+                <button onclick="submitWithdraw()" class="btn-primary btn-danger"><i class="fas fa-money-bill-wave"></i> Withdraw</button>
+            </div>
+        </div>
+
+        <!-- 4. REFERRAL SCREEN -->
+        <div id="referScreen" class="hidden wallet-screen-padding">
+            <div class="balance-card-main purple">
+                <i class="fas fa-users"></i>
+                <p>Total Referral Earnings</p>
+                <h2>₹<span id="referralEarning">0</span></h2>
+            </div>
+
+            <div class="action-card">
+                <h3 style="font-size: 16px; font-weight: 800; color: #111827; margin-bottom: 5px;">Refer & Earn Big!</h3>
+                <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Share your link and earn commission when your friends join tournaments.</p>
+                
+                <div class="copy-box" onclick="copyReferLink()"><span id="referLinkText">Generating Link...</span><i class="far fa-copy"></i></div>
+                <button onclick="shareReferLink()" class="btn-primary" style="margin-top: 15px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);"><i class="fas fa-share-nodes"></i> Share Link Now</button>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 0;">Commission History</h3>
+            <div class="history-list" id="referHistoryList">
+                <div class="empty-state"><i class="fas fa-users-slash"></i><p>No referrals yet.</p></div>
+            </div>
+        </div>
+
+        <!-- 5. HISTORY SCREEN -->
+        <div id="historyScreen" class="hidden wallet-screen-padding">
+            <h3 class="section-title" style="margin-top: 0;">Transaction History</h3>
+            <div class="history-list" id="historyList">
+                <div class="empty-state"><i class="fas fa-receipt"></i><p>Loading history...</p></div>
+            </div>
+        </div>
+
+        <!-- BOTTOM NAVIGATION -->
+        <div class="bottom-nav">
+            <div class="nav-link active" id="navHome" onclick="switchTab('home')"><i class="fas fa-layer-group"></i><span>Matches</span></div>
+            <div class="nav-link" id="navWallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Wallet</span></div>
+            <div class="nav-link" id="navRefer" onclick="switchTab('refer')"><i class="fas fa-user-friends"></i><span>Refer</span></div>
+            <div class="nav-link" id="navHistory" onclick="switchTab('history')"><i class="fas fa-file-invoice-dollar"></i><span>History</span></div>
+            <div class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwngsEiCyTBtHickTJ9Hl9h9EYuiufkuGH8wUi7bbxpZ83mm2r9c-lKW8Kja-D6CkeDLw/exec';
+
+    let currentUser = null;
+    let currentTicketPrice = 0;
+    let currentBalance = 0;
+    let timerInterval = null;
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const refCode = urlParams.get('ref');
+        if(refCode) {
+            document.getElementById('regReferral').value = refCode;
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+    };
+
+    function showLoader(show) { document.getElementById('loader').classList.toggle('hidden', !show); }
+    
+    function toggleAuth() {
+        document.getElementById('loginForm').classList.toggle('hidden');
+        document.getElementById('registerForm').classList.toggle('hidden');
+    }
+
+    function switchTab(tab) {
+        ['homeScreen', 'walletScreen', 'referScreen', 'historyScreen'].forEach(id => document.getElementById(id).classList.add('hidden'));
+        ['navHome', 'navWallet', 'navRefer', 'navHistory'].forEach(id => document.getElementById(id).classList.remove('active'));
+
+        const header = document.getElementById('appHeader');
+        if(tab === 'home') {
+            header.style.borderBottomLeftRadius = '30px'; header.style.borderBottomRightRadius = '30px'; header.style.paddingBottom = '45px';
+        } else {
+            header.style.borderBottomLeftRadius = '0px'; header.style.borderBottomRightRadius = '0px'; header.style.paddingBottom = '25px';
+        }
+
+        if(tab === 'home') {
+            document.getElementById('homeScreen').classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); loadSettings();
+        } else if(tab === 'wallet') {
+            document.getElementById('walletScreen').classList.remove('hidden'); document.getElementById('navWallet').classList.add('active'); fetchWalletData();
+        } else if(tab === 'refer') {
+            document.getElementById('referScreen').classList.remove('hidden'); document.getElementById('navRefer').classList.add('active'); setupReferralLink(); fetchReferralData();
+        } else if(tab === 'history') {
+            document.getElementById('historyScreen').classList.remove('hidden'); document.getElementById('navHistory').classList.add('active'); fetchWalletData();
+        }
+    }
+
+    function switchWalletTab(type) {
+        document.getElementById('depositSection').classList.add('hidden'); document.getElementById('withdrawSection').classList.add('hidden');
+        document.getElementById('tabDeposit').classList.remove('active'); document.getElementById('tabWithdraw').classList.remove('active');
+
+        if(type === 'deposit') { document.getElementById('depositSection').classList.remove('hidden'); document.getElementById('tabDeposit').classList.add('active'); } 
+        else { document.getElementById('withdrawSection').classList.remove('hidden'); document.getElementById('tabWithdraw').classList.add('active'); }
+    }
+
+    function copyUPI() { navigator.clipboard.writeText(document.getElementById('adminUPI').innerText); alert("UPI ID Copied to Clipboard!"); }
+
+    function setupReferralLink() {
+        if(currentUser) { document.getElementById('referLinkText').innerText = window.location.origin + window.location.pathname + "?ref=" + currentUser.uid; }
+    }
+
+    function copyReferLink() { navigator.clipboard.writeText(document.getElementById('referLinkText').innerText); alert("Referral Link Copied!"); }
+
+    function shareReferLink() {
+        const link = document.getElementById('referLinkText').innerText;
+        if (navigator.share) { navigator.share({ title: 'Play & Win', url: link }).catch((e) => console.log(e)); } else { copyReferLink(); }
+    }
+
+    function parseCustomDate(dStr) {
+        if(!dStr) return 0;
+        let parts = dStr.split(' | ');
+        if(parts.length < 2) return 0;
+        let dateParts = parts[0].split('-');
+        let timeParts = parts[1].split(' ');
+        let time = timeParts[0].split(':');
+        let hours = parseInt(time[0]);
+        let mins = parseInt(time[1]);
+        if(timeParts[1] && timeParts[1].toUpperCase() === 'PM' && hours !== 12) hours += 12;
+        if(timeParts[1] && timeParts[1].toUpperCase() === 'AM' && hours === 12) hours = 0;
+        return new Date(dateParts[2], dateParts[1]-1, dateParts[0], hours, mins).getTime();
+    }
+
+    function loadSettings() {
+        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getSettings'}) })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'success') {
+                document.getElementById('prizePool').innerText = data.data['Prize Pool'] || '--';
+                document.getElementById('ticketPrice').innerText = data.data['Lucky Draw Price'] || '--';
+                document.getElementById('participants').innerText = data.data['Participant'] || '--';
+                
+                // Set Admin UPI and Generate QR Code dynamically
+                const upiId = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
+                document.getElementById('adminUPI').innerText = upiId;
+                
+                if(upiId !== 'Contact Admin') {
+                    // Generate QR code using API
+                    const upiString = encodeURIComponent(`upi://pay?pa=${upiId}&pn=LuckyDrawAdmin`);
+                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${upiString}`;
+                    // Force show loader while generating new QR
+                    document.getElementById('qrLoader').style.display = 'block';
+                    document.getElementById('upiQRCode').style.display = 'none';
+                    document.getElementById('upiQRCode').src = qrUrl;
+                }
+
+                currentTicketPrice = Number(data.data['Lucky Draw Price']);
+
+                let joined = data.currentJoined || 0;
+                let total = Number(data.data['Participant']);
+                document.getElementById('currentJoined').innerText = joined;
+                document.getElementById('progFill').style.width = ((joined / total) * 100) + '%';
+                
+                startTimer(data.data['Timer']);
+            }
+        }).catch(err => console.error(err));
+    }
+
+    function startTimer(timerStr) {
+        clearInterval(timerInterval);
+        let durationMs = 24 * 60 * 60 * 1000; 
+        if (timerStr) {
+            let str = timerStr.toLowerCase();
+            let val = parseFloat(str.split(' ')[0]); 
+            if (!isNaN(val)) {
+                if (str.includes('hour')) durationMs = val * 60 * 60 * 1000;
+                else if (str.includes('min')) durationMs = val * 60 * 1000;
+                else if (str.includes('sec')) durationMs = val * 1000;
+            }
+        }
+
+        timerInterval = setInterval(() => {
+            let now = new Date().getTime() + (5.5 * 60 * 60 * 1000); 
+            let distance = durationMs - (now % durationMs);
+
+            if (distance < 1000) {
+                document.getElementById('countdownTimer').innerText = "PROCESSING...";
+                return;
+            }
+
+            let h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let s = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+
+            if (h > 0) { document.getElementById('countdownTimer').innerText = `${h}h ${m}m ${s}s`; } 
+            else { document.getElementById('countdownTimer').innerText = `${m}m ${s}s`; }
+        }, 1000);
+    }
+
+    function fetchWalletData() {
+        if(!currentUser) return;
+        showLoader(true);
+        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getWalletData', 'uid': currentUser.uid}) })
+        .then(res => res.json())
+        .then(data => {
+            showLoader(false);
+            if(data.status === 'success') {
+                currentBalance = data.balance;
+                document.getElementById('headerBalance').innerText = currentBalance;
+                document.getElementById('walletBalance').innerText = currentBalance;
+                
+                const list = document.getElementById('historyList');
+                list.innerHTML = '';
+                
+                if(data.history.length === 0) {
+                    list.innerHTML = `<div class="empty-state"><i class="fas fa-receipt"></i><p>No transactions yet.</p></div>`;
+                } else {
+                    let expandedHistory = [];
+
+                    data.history.forEach(item => {
+                        let st = item.status ? item.status.toLowerCase() : '';
+                        let isFailedWithdrawal = (item.type === 'Withdrawal' && (st.includes('reject') || st.includes('reverse') || st.includes('fail') || st.includes('refund')));
+
+                        if (isFailedWithdrawal) {
+                            expandedHistory.push({
+                                type: 'Withdrawal',
+                                amount: item.amount,
+                                date: item.date,
+                                status: item.status, 
+                                remark: item.remark,
+                                isOriginalReject: true
+                            });
+
+                            expandedHistory.push({
+                                type: 'Withdrawal Refunded',
+                                amount: item.amount,
+                                date: item.date,
+                                status: 'Refunded',
+                                remark: 'Amount credited back to wallet',
+                                isRefundRow: true
+                            });
+                        } else {
+                            expandedHistory.push(item);
+                        }
+                    });
+
+                    expandedHistory.sort((a, b) => {
+                        let diff = parseCustomDate(b.date) - parseCustomDate(a.date);
+                        if (diff === 0) {
+                            if (a.isRefundRow && !b.isRefundRow) return -1;
+                            if (!a.isRefundRow && b.isRefundRow) return 1;
+                        }
+                        return diff;
+                    });
+
+                    expandedHistory.forEach(item => {
+                        let iconClass = '', colorClass = '', amtPrefix = '';
+                        let statusHtml = `<p>${item.date}</p>`;
+                        let displayType = item.type;
+                        let st = item.status ? item.status.toLowerCase() : '';
+
+                        if(item.type === 'Deposit' || item.type === 'Winning' || item.type === 'Referral' || item.type === 'Refund' || item.type === 'Withdrawal Refunded') { 
+                            iconClass = 'deposit fa-arrow-down'; colorClass = 'plus'; amtPrefix = '+'; 
+                        } else { 
+                            iconClass = 'withdraw fa-arrow-up'; colorClass = 'minus'; amtPrefix = '-'; 
+                        }
+
+                        if(st === 'pending') {
+                            statusHtml = `<span class="badge-status badge-pending">Pending</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                        } else if (item.isOriginalReject) {
+                            statusHtml = `<span class="badge-status badge-reject">${item.status}</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                            colorClass = 'neutral'; amtPrefix = ''; iconClass = 'reject fa-times'; 
+                        } else if (item.isRefundRow) {
+                            statusHtml = `<span class="badge-status" style="background:#ecfdf5; color:#10b981;">Refunded</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                        }
+
+                        let remarkHtml = '';
+                        if (item.remark) {
+                            if (item.isRefundRow) {
+                                remarkHtml = `<br><span class="remark" style="background:#ecfdf5; color:#10b981;">${item.remark}</span>`;
+                            } else {
+                                remarkHtml = `<br><span class="remark">Admin: ${item.remark}</span>`;
+                            }
+                        }
+
+                        list.innerHTML += `
+                            <div class="h-item">
+                                <div class="h-icon ${iconClass}"><i class="fas ${iconClass.split(' ')[1]}"></i></div>
+                                <div class="h-details"><h4>${displayType}</h4>${statusHtml}${remarkHtml}</div>
+                                <div class="h-amount ${colorClass}"><h4>${amtPrefix}₹${item.amount}</h4></div>
+                            </div>`;
+                    });
+                }
+            }
+        }).catch(err => { showLoader(false); console.error(err); });
+    }
+
+    function fetchReferralData() {
+        if(!currentUser) return;
+        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getReferrals', 'uid': currentUser.uid}) })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'success') {
+                document.getElementById('referralEarning').innerText = data.totalEarning || '0';
+                
+                const list = document.getElementById('referHistoryList');
+                list.innerHTML = '';
+
+                if(!data.history || data.history.length === 0) {
+                    list.innerHTML = `<div class="empty-state"><i class="fas fa-users-slash"></i><p>No referrals yet.</p></div>`;
+                } else {
+                    data.history.sort((a, b) => parseCustomDate(b.date) - parseCustomDate(a.date));
+                    data.history.forEach(item => {
+                        list.innerHTML += `
+                            <div class="h-item">
+                                <div class="h-icon refer"><i class="fas fa-user-check"></i></div>
+                                <div class="h-details"><h4>${item.userName} Joined</h4><p>Date: ${item.date}</p></div>
+                                <div class="h-amount plus"><h4>+₹${item.amount}</h4></div>
+                            </div>`;
+                    });
+                }
+            }
+        }).catch(err => console.error(err));
+    }
+
+    function registerUser() {
+        const name = document.getElementById('regName').value;
+        const mobile = document.getElementById('regMobile').value;
+        const email = document.getElementById('regEmail').value; 
+        const referCode = document.getElementById('regReferral').value;
+        const password = document.getElementById('regPassword').value;
+
+        if(!name || !mobile || !email || !password) { alert("Please fill required fields!"); return; }
+
+        showLoader(true);
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new URLSearchParams({
+                'action': 'register', 'name': name, 'mobile': mobile, 'email': email, 'password': password, 'referCode': referCode
+            })
+        }).then(res => res.json()).then(data => {
+            showLoader(false); alert(data.message); if(data.status === 'success') toggleAuth();
+        }).catch(() => { showLoader(false); alert("Error connecting to server."); });
+    }
+
+    function loginUser() {
+        const mobile = document.getElementById('loginMobile').value;
+        const password = document.getElementById('loginPassword').value;
+        if(!mobile || !password) { alert("Please enter Mobile and Password"); return; }
+
+        showLoader(true);
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new URLSearchParams({'action': 'login', 'mobile': mobile, 'password': password})
+        }).then(res => res.json()).then(data => {
+            showLoader(false);
+            if(data.status === 'success') {
+                currentUser = data.user;
+                document.getElementById('authScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                document.getElementById('mainApp').style.display = 'flex'; 
+                
+                document.getElementById('userName').innerText = currentUser.name;
+                document.getElementById('userUID').innerText = currentUser.uid;
+                
+                loadSettings(); fetchWalletData();
+            } else { alert(data.message); }
+        }).catch(() => { showLoader(false); alert("Error connecting to server."); });
+    }
+
+    function submitDeposit() {
+        const amount = document.getElementById('depAmount').value;
+        const utr = document.getElementById('depUTR').value;
+        if(!amount || !utr) { alert("Please enter Amount and UTR Number."); return; }
+
+        showLoader(true);
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new URLSearchParams({'action': 'deposit', 'uid': currentUser.uid, 'amount': amount, 'utr': utr})
+        }).then(res => res.json()).then(data => {
+            showLoader(false); alert(data.message);
+            document.getElementById('depAmount').value = ''; document.getElementById('depUTR').value = ''; fetchWalletData();
+        }).catch(() => { showLoader(false); alert("Error connecting to server."); });
+    }
+
+    function submitWithdraw() {
+        const amount = document.getElementById('withAmount').value;
+        const upi = document.getElementById('withUPI').value;
+        if(!amount || !upi) { alert("Please enter Amount and your UPI ID."); return; }
+        if(Number(amount) > currentBalance) { alert("Insufficient Wallet Balance!"); return; }
+
+        showLoader(true);
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new URLSearchParams({'action': 'withdraw', 'uid': currentUser.uid, 'amount': amount, 'upi': upi, 'currentBalance': currentBalance})
+        }).then(res => res.json()).then(data => {
+            showLoader(false); alert(data.message);
+            document.getElementById('withAmount').value = ''; document.getElementById('withUPI').value = ''; fetchWalletData();
+        }).catch(() => { showLoader(false); alert("Error connecting to server."); });
+    }
+
+    function joinTournament() {
+        if(currentTicketPrice === 0) { alert("Loading tournament details. Please wait."); return; }
+        if(currentBalance < currentTicketPrice) { alert(`Insufficient Balance! You need ₹${currentTicketPrice} to join.`); switchTab('wallet'); return; }
+
+        if(!confirm(`Confirm joining Mega Draw for ₹${currentTicketPrice}?`)) return;
+        
+        showLoader(true);
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new URLSearchParams({'action': 'buyTicket', 'uid': currentUser.uid, 'amount': currentTicketPrice, 'currentBalance': currentBalance})
+        }).then(res => res.json()).then(data => {
+            showLoader(false); alert(data.message); if(data.status === 'success') { fetchWalletData(); loadSettings(); } 
+        }).catch(() => { showLoader(false); alert("Error connecting to server."); });
+    }
+
+    function logout() {
+        currentUser = null; currentBalance = 0;
+        document.getElementById('authScreen').classList.remove('hidden');
+        document.getElementById('mainApp').classList.add('hidden');
+        document.getElementById('mainApp').style.display = 'none'; 
+        document.getElementById('loginMobile').value = ''; document.getElementById('loginPassword').value = '';
+    }
+</script>
+</body>
+</html>
