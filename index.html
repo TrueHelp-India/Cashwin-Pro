@@ -64,44 +64,60 @@
         .screen-content { padding: 0 20px; margin-top: -25px; position: relative; z-index: 20; }
         .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
         
-        .tournament-card { background: white; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #f3f4f6; }
-        .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .live-badge { background: rgba(255,255,255,0.25); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; }
-        .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 5px #ef4444; }
-        .t-header h3 { font-size: 22px; font-weight: 800; margin-top: 8px; }
-        .t-header i { font-size: 40px; opacity: 0.4; }
+        /* NEW SCROLLING NOTIFICATION BANNER */
+        .winner-marquee {
+            background: linear-gradient(90deg, #ecfdf5, #d1fae5);
+            border: 1px solid #a7f3d0;
+            border-radius: 12px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #047857;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            position: relative;
+            z-index: 21;
+        }
+        .winner-marquee i { font-size: 16px; color: #10b981; flex-shrink: 0; }
+        .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 18s linear infinite; font-weight: 500; }
+        .marquee-content strong { font-weight: 800; color: #064e3b; }
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* COMPACT TOURNAMENT CARD */
+        .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px;}
+        .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .live-badge { background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; }
+        .live-dot { width: 6px; height: 6px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 5px #ef4444; }
+        .t-header h3 { font-size: 20px; font-weight: 800; margin-top: 4px; }
+        .t-header i { font-size: 32px; opacity: 0.4; }
         
-        .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 10px; font-size: 14px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 8px; font-size: 13px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 8px; }
         
-        .t-body { padding: 24px; }
-        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .prize-info label, .fee-info label { font-size: 12px; color: #6b7280; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 4px;}
-        .prize-info h2 { font-size: 28px; font-weight: 900; color: #111827; }
+        .t-body { padding: 20px; }
+        .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .prize-info label, .fee-info label { font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 4px;}
+        .prize-info h2 { font-size: 24px; font-weight: 900; color: #111827; }
         .fee-info { text-align: right; }
-        .fee-box { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 8px 16px; border-radius: 10px; font-weight: 800; font-size: 18px; display: inline-block; }
+        .fee-box { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 16px; display: inline-block; }
         
-        .progress-box { margin-bottom: 24px; }
-        .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #4b5563; margin-bottom: 8px; }
-        .progress-bar { width: 100%; height: 8px; background: #f3f4f6; border-radius: 10px; overflow: hidden; }
+        .progress-box { margin-bottom: 20px; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #4b5563; margin-bottom: 6px; }
+        .progress-bar { width: 100%; height: 6px; background: #f3f4f6; border-radius: 10px; overflow: hidden; }
         .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 10px; transition: width 0.5s; }
         
-        .btn-join { width: 100%; padding: 18px; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: white; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.2s; }
+        .btn-join { width: 100%; padding: 15px; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 8px 15px rgba(0,0,0,0.15); transition: 0.2s; }
         .btn-join:active { transform: scale(0.98); }
         .btn-join:disabled { background: #9ca3af; cursor: not-allowed; box-shadow: none; }
-
-        .champion-card { background: white; border-radius: 16px; padding: 16px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; margin-bottom: 15px; }
-        .champ-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #d97706; font-size: 20px; margin-right: 15px; border: 1px solid #fcd34d; }
-        .champ-info { flex: 1; }
-        .champ-info h4 { font-size: 15px; font-weight: 700; color: #111827; }
-        .champ-info p { font-size: 12px; color: #6b7280; margin-top: 2px; font-weight: 500; }
-        .champ-prize { text-align: right; }
-        .champ-prize h4 { font-size: 15px; font-weight: 800; color: #10b981; }
-        .champ-prize p { font-size: 10px; color: #9ca3af; font-weight: 500; margin-top: 2px; }
 
         /* WALLET & REFERRAL SCREENS */
         .wallet-screen-padding { padding: 20px; }
         
-        /* UPDATED: Total Balance Card Height Reduced */
         .balance-card-main { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-radius: 20px; padding: 20px; text-align: center; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 20px; position: relative; overflow: hidden; }
         .balance-card-main.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
         .balance-card-main i { position: absolute; right: -20px; bottom: -20px; font-size: 100px; opacity: 0.05; }
@@ -116,7 +132,6 @@
         .upi-info-box { background: #eff6ff; border: 1px dashed #93c5fd; border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 20px; }
         .upi-info-box p { font-size: 12px; color: #4b5563; font-weight: 500; margin-bottom: 10px; }
         
-        /* NEW: QR CODE STYLES */
         .qr-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 15px; background: white; border-radius: 12px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; }
         .qr-image { width: 100%; height: 100%; object-fit: contain; display: none; }
         .qr-loader { width: 30px; height: 30px; border: 3px solid #e5e7eb; border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
@@ -223,6 +238,17 @@
 
         <!-- 2. HOME SCREEN (MATCHES) -->
         <div id="homeScreen" class="screen-content">
+            
+            <!-- NEW SCROLLING BANNER -->
+            <div class="winner-marquee">
+                <i class="fas fa-gift"></i>
+                <div class="marquee-wrapper">
+                    <div class="marquee-content">
+                        🎉 <strong>Ranjan Kumar</strong> won <strong>₹2,000</strong> (Today) &nbsp;&nbsp; | &nbsp;&nbsp; 🎉 <strong>Amit Singh</strong> won <strong>₹5,000</strong> (Yesterday) &nbsp;&nbsp; | &nbsp;&nbsp; 🎉 <strong>Priya M.</strong> won <strong>₹1,500</strong> (14-Jul)
+                    </div>
+                </div>
+            </div>
+
             <div class="tournament-card">
                 <div class="t-header">
                     <div>
@@ -262,18 +288,7 @@
                 </div>
             </div>
 
-            <h3 class="section-title">Recent Champions</h3>
-            <div class="champion-card">
-                <div class="champ-icon"><i class="fas fa-trophy"></i></div>
-                <div class="champ-info">
-                    <h4>Ranjan Kumar</h4>
-                    <p>UID: 467592 • Mega Draw</p>
-                </div>
-                <div class="champ-prize">
-                    <h4>+ ₹2,000</h4>
-                    <p>Yesterday</p>
-                </div>
-            </div>
+            <!-- Removed "Recent Champions" Section from here -->
         </div>
 
         <!-- 3. WALLET SCREEN -->
@@ -291,7 +306,6 @@
 
             <div id="depositSection" class="action-card">
                 <div class="upi-info-box">
-                    <!-- NEW: DYNAMIC QR CODE WRAPPER -->
                     <div class="qr-wrapper">
                         <div class="qr-loader" id="qrLoader"></div>
                         <img id="upiQRCode" class="qr-image" alt="UPI QR Code" onload="document.getElementById('qrLoader').style.display='none'; this.style.display='block';">
@@ -354,7 +368,7 @@
 </div>
 
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwngsEiCyTBtHickTJ9Hl9h9EYuiufkuGH8wUi7bbxpZ83mm2r9c-lKW8Kja-D6CkeDLw/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGwtxd8iHr-12tHCBWZDSc1dpsUYIcjiC3JPN2snND7CORdXSw761W-9D2St7a_0tRsw/exec';
 
     let currentUser = null;
     let currentTicketPrice = 0;
@@ -444,22 +458,18 @@
                 document.getElementById('ticketPrice').innerText = data.data['Lucky Draw Price'] || '--';
                 document.getElementById('participants').innerText = data.data['Participant'] || '--';
                 
-                // Set Admin UPI and Generate QR Code dynamically
                 const upiId = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
                 document.getElementById('adminUPI').innerText = upiId;
                 
                 if(upiId !== 'Contact Admin') {
-                    // Generate QR code using API
                     const upiString = encodeURIComponent(`upi://pay?pa=${upiId}&pn=LuckyDrawAdmin`);
                     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${upiString}`;
-                    // Force show loader while generating new QR
                     document.getElementById('qrLoader').style.display = 'block';
                     document.getElementById('upiQRCode').style.display = 'none';
                     document.getElementById('upiQRCode').src = qrUrl;
                 }
 
                 currentTicketPrice = Number(data.data['Lucky Draw Price']);
-
                 let joined = data.currentJoined || 0;
                 let total = Number(data.data['Participant']);
                 document.getElementById('currentJoined').innerText = joined;
@@ -529,28 +539,14 @@
                         let isFailedWithdrawal = (item.type === 'Withdrawal' && (st.includes('reject') || st.includes('reverse') || st.includes('fail') || st.includes('refund')));
 
                         if (isFailedWithdrawal) {
-                            expandedHistory.push({
-                                type: 'Withdrawal',
-                                amount: item.amount,
-                                date: item.date,
-                                status: item.status, 
-                                remark: item.remark,
-                                isOriginalReject: true
-                            });
-
-                            expandedHistory.push({
-                                type: 'Withdrawal Refunded',
-                                amount: item.amount,
-                                date: item.date,
-                                status: 'Refunded',
-                                remark: 'Amount credited back to wallet',
-                                isRefundRow: true
-                            });
+                            expandedHistory.push({ type: 'Withdrawal', amount: item.amount, date: item.date, status: item.status, remark: item.remark, isOriginalReject: true });
+                            expandedHistory.push({ type: 'Withdrawal Refunded', amount: item.amount, date: item.date, status: 'Refunded', remark: 'Amount credited back to wallet', isRefundRow: true });
                         } else {
                             expandedHistory.push(item);
                         }
                     });
 
+                    // GUARANTEE NEWEST FIRST
                     expandedHistory.sort((a, b) => {
                         let diff = parseCustomDate(b.date) - parseCustomDate(a.date);
                         if (diff === 0) {
@@ -583,11 +579,8 @@
 
                         let remarkHtml = '';
                         if (item.remark) {
-                            if (item.isRefundRow) {
-                                remarkHtml = `<br><span class="remark" style="background:#ecfdf5; color:#10b981;">${item.remark}</span>`;
-                            } else {
-                                remarkHtml = `<br><span class="remark">Admin: ${item.remark}</span>`;
-                            }
+                            if (item.isRefundRow) { remarkHtml = `<br><span class="remark" style="background:#ecfdf5; color:#10b981;">${item.remark}</span>`; } 
+                            else { remarkHtml = `<br><span class="remark">Admin: ${item.remark}</span>`; }
                         }
 
                         list.innerHTML += `
@@ -616,7 +609,9 @@
                 if(!data.history || data.history.length === 0) {
                     list.innerHTML = `<div class="empty-state"><i class="fas fa-users-slash"></i><p>No referrals yet.</p></div>`;
                 } else {
+                    // GUARANTEE NEWEST FIRST
                     data.history.sort((a, b) => parseCustomDate(b.date) - parseCustomDate(a.date));
+                    
                     data.history.forEach(item => {
                         list.innerHTML += `
                             <div class="h-item">
