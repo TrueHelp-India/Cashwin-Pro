@@ -29,8 +29,8 @@
         .spinner { width: 45px; height: 45px; border: 4px solid #e5e7eb; border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* AUTH SCREEN */
-        .auth-screen { padding: 40px 25px; display: flex; flex-direction: column; justify-content: center; flex: 1; background: white; min-height: 100vh; }
+        /* AUTH SCREEN (UPDATED: Top-Center Alignment) */
+        .auth-screen { padding: 12vh 25px 40px 25px; display: flex; flex-direction: column; justify-content: flex-start; flex: 1; background: white; min-height: 100vh; }
         .logo-box { text-align: center; margin-bottom: 40px; }
         .logo-icon { width: 75px; height: 75px; background: #eff6ff; border-radius: 20px; display: flex; justify-content: center; align-items: center; color: #3b82f6; font-size: 32px; margin: 0 auto 15px; box-shadow: 0 4px 15px rgba(59,130,246,0.1); }
         .logo-box h1 { font-size: 26px; font-weight: 800; color: #111827; }
@@ -48,8 +48,8 @@
         .auth-switch { text-align: center; margin-top: 25px; font-size: 14px; color: #6b7280; font-weight: 500; }
         .auth-switch span { color: #3b82f6; font-weight: 700; cursor: pointer; }
 
-        /* HEADER */
-        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 25px 20px 45px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
+        /* FLAT HEADER */
+        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 25px 20px 35px 20px; border-radius: 0; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
         .user-profile { display: flex; align-items: center; gap: 12px; }
         .avatar { width: 46px; height: 46px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; }
         .user-info p { font-size: 12px; color: #bfdbfe; font-weight: 500; }
@@ -61,36 +61,39 @@
         .wallet-brief h3 { font-size: 20px; font-weight: 800; margin-top: 2px; }
 
         /* HOME SCREEN & CARDS */
-        .screen-content { padding: 0 20px; margin-top: -25px; position: relative; z-index: 20; }
+        .screen-content { padding: 0 20px; margin-top: -15px; position: relative; z-index: 20; }
         .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
         
-        /* NEW SCROLLING NOTIFICATION BANNER */
+        /* NEW DYNAMIC SCROLLING NOTIFICATION BANNER */
         .winner-marquee {
             background: linear-gradient(90deg, #ecfdf5, #d1fae5);
             border: 1px solid #a7f3d0;
             border-radius: 12px;
-            padding: 10px 15px;
+            padding: 14px 16px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 15px;
             color: #047857;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             position: relative;
             z-index: 21;
+            overflow: hidden;
+            width: 100%;
         }
-        .winner-marquee i { font-size: 16px; color: #10b981; flex-shrink: 0; }
-        .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; }
-        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 18s linear infinite; font-weight: 500; }
+        .winner-marquee i { font-size: 20px; color: #10b981; flex-shrink: 0; }
+        .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; display: flex; }
+        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 20s linear infinite; font-weight: 500; white-space: nowrap; }
         .marquee-content strong { font-weight: 800; color: #064e3b; }
+        
         @keyframes marquee-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
         /* COMPACT TOURNAMENT CARD */
-        .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px;}
+        .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px; width: 100%; }
         .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
         .live-badge { background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; }
         .live-dot { width: 6px; height: 6px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 5px #ef4444; }
@@ -220,7 +223,7 @@
     <!-- MAIN APP CONTENT (Hidden till login) -->
     <div id="mainApp" class="hidden" style="flex: 1; flex-direction: column;">
         
-        <!-- Header -->
+        <!-- FLAT Header -->
         <div class="app-header" id="appHeader">
             <div class="user-profile">
                 <div class="avatar"><i class="fas fa-user text-white"></i></div>
@@ -239,12 +242,12 @@
         <!-- 2. HOME SCREEN (MATCHES) -->
         <div id="homeScreen" class="screen-content">
             
-            <!-- NEW SCROLLING BANNER -->
+            <!-- NEW DYNAMIC SCROLLING BANNER -->
             <div class="winner-marquee">
                 <i class="fas fa-gift"></i>
                 <div class="marquee-wrapper">
-                    <div class="marquee-content">
-                        🎉 <strong>Ranjan Kumar</strong> won <strong>₹2,000</strong> (Today) &nbsp;&nbsp; | &nbsp;&nbsp; 🎉 <strong>Amit Singh</strong> won <strong>₹5,000</strong> (Yesterday) &nbsp;&nbsp; | &nbsp;&nbsp; 🎉 <strong>Priya M.</strong> won <strong>₹1,500</strong> (14-Jul)
+                    <div class="marquee-content" id="marqueeText">
+                        Loading recent winners... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
@@ -288,7 +291,6 @@
                 </div>
             </div>
 
-            <!-- Removed "Recent Champions" Section from here -->
         </div>
 
         <!-- 3. WALLET SCREEN -->
@@ -368,12 +370,20 @@
 </div>
 
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGwtxd8iHr-12tHCBWZDSc1dpsUYIcjiC3JPN2snND7CORdXSw761W-9D2St7a_0tRsw/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0wLIGQ--MUq3AP-HmHl1KQI-jnNfEvAPOVFF2J64dEC2ZOeVhNSQeNEC7QHIrxq8mEQ/exec';
 
     let currentUser = null;
     let currentTicketPrice = 0;
     let currentBalance = 0;
     let timerInterval = null;
+    let autoRefreshInterval = null;
+    
+    // State variables for avoiding flickering during auto-refresh
+    let currentAdminUPI = "";
+    let currentTimerStr = "";
+    let lastHistoryData = "";
+    let lastReferralData = "";
+    let lastWinnersData = ""; // New state variable for Banner
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -396,13 +406,9 @@
         ['homeScreen', 'walletScreen', 'referScreen', 'historyScreen'].forEach(id => document.getElementById(id).classList.add('hidden'));
         ['navHome', 'navWallet', 'navRefer', 'navHistory'].forEach(id => document.getElementById(id).classList.remove('active'));
 
-        const header = document.getElementById('appHeader');
-        if(tab === 'home') {
-            header.style.borderBottomLeftRadius = '30px'; header.style.borderBottomRightRadius = '30px'; header.style.paddingBottom = '45px';
-        } else {
-            header.style.borderBottomLeftRadius = '0px'; header.style.borderBottomRightRadius = '0px'; header.style.paddingBottom = '25px';
-        }
+        // Removed dynamic border-radius manipulation so header stays flat universally.
 
+        // Tab changes will now silently fetch data without showing the loader block
         if(tab === 'home') {
             document.getElementById('homeScreen').classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); loadSettings();
         } else if(tab === 'wallet') {
@@ -449,8 +455,53 @@
         return new Date(dateParts[2], dateParts[1]-1, dateParts[0], hours, mins).getTime();
     }
 
+    // BACKGROUND AUTO-REFRESH (Every 2.5 seconds)
+    function startAutoRefresh() {
+        clearInterval(autoRefreshInterval);
+        autoRefreshInterval = setInterval(() => {
+            if(currentUser) {
+                loadSettings();
+                fetchWalletData();
+                fetchWinners(); // Fetch for Banner
+                fetchReferralData(); // ALWAYS FETCH REFERRAL DATA IN BACKGROUND
+            }
+        }, 2500); 
+    }
+
+    // FETCH DYNAMIC WINNERS FOR BANNER
+    function fetchWinners() {
+        return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getRecentWinners'}) })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'success' && data.data && data.data.length > 0) {
+                const winStr = JSON.stringify(data.data);
+                // Sirf tab update karo jab sheet me naya winner add hua ho
+                if(lastWinnersData !== winStr) {
+                    lastWinnersData = winStr;
+                    let marqueeHtml = "";
+                    data.data.forEach(item => {
+                        marqueeHtml += `🎉 <strong>${item.name}</strong> won <strong>₹${item.amount}</strong> (${item.date}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
+                    });
+                    const marqueeEl = document.getElementById('marqueeText');
+                    marqueeEl.innerHTML = marqueeHtml;
+                    
+                    // Reset CSS animation softly so it continues nicely
+                    marqueeEl.style.animation = 'none';
+                    marqueeEl.offsetHeight; 
+                    marqueeEl.style.animation = 'marquee-scroll 20s linear infinite';
+                }
+            } else if (!lastWinnersData) {
+               document.getElementById('marqueeText').innerHTML = "Join now and be the first winner! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+        }).catch(err => {
+            console.error("Banner Error:", err);
+            if (!lastWinnersData) { document.getElementById('marqueeText').innerHTML = "Join Mega Draw & Win Big! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; }
+        });
+    }
+
+    // Now returns a Promise and operates completely Silently (No showLoader)
     function loadSettings() {
-        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getSettings'}) })
+        return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getSettings'}) })
         .then(res => res.json())
         .then(data => {
             if(data.status === 'success') {
@@ -459,14 +510,18 @@
                 document.getElementById('participants').innerText = data.data['Participant'] || '--';
                 
                 const upiId = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
-                document.getElementById('adminUPI').innerText = upiId;
                 
-                if(upiId !== 'Contact Admin') {
-                    const upiString = encodeURIComponent(`upi://pay?pa=${upiId}&pn=LuckyDrawAdmin`);
-                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${upiString}`;
-                    document.getElementById('qrLoader').style.display = 'block';
-                    document.getElementById('upiQRCode').style.display = 'none';
-                    document.getElementById('upiQRCode').src = qrUrl;
+                // Only change QR if UPI ID changes (prevents flickering)
+                if(currentAdminUPI !== upiId) {
+                    currentAdminUPI = upiId;
+                    document.getElementById('adminUPI').innerText = upiId;
+                    if(upiId !== 'Contact Admin') {
+                        const upiString = encodeURIComponent(`upi://pay?pa=${upiId}&pn=LuckyDrawAdmin`);
+                        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${upiString}`;
+                        document.getElementById('qrLoader').style.display = 'block';
+                        document.getElementById('upiQRCode').style.display = 'none';
+                        document.getElementById('upiQRCode').src = qrUrl;
+                    }
                 }
 
                 currentTicketPrice = Number(data.data['Lucky Draw Price']);
@@ -475,7 +530,11 @@
                 document.getElementById('currentJoined').innerText = joined;
                 document.getElementById('progFill').style.width = ((joined / total) * 100) + '%';
                 
-                startTimer(data.data['Timer']);
+                // Only restart timer if backend timer string changes
+                if(currentTimerStr !== data.data['Timer']) {
+                    currentTimerStr = data.data['Timer'];
+                    startTimer(currentTimerStr);
+                }
             }
         }).catch(err => console.error(err));
     }
@@ -514,112 +573,118 @@
         }, 1000);
     }
 
+    // Now returns a Promise and operates completely Silently
     function fetchWalletData() {
-        if(!currentUser) return;
-        showLoader(true);
-        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getWalletData', 'uid': currentUser.uid}) })
+        if(!currentUser) return Promise.resolve();
+        return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getWalletData', 'uid': currentUser.uid}) })
         .then(res => res.json())
         .then(data => {
-            showLoader(false);
             if(data.status === 'success') {
                 currentBalance = data.balance;
                 document.getElementById('headerBalance').innerText = currentBalance;
                 document.getElementById('walletBalance').innerText = currentBalance;
                 
-                const list = document.getElementById('historyList');
-                list.innerHTML = '';
-                
-                if(data.history.length === 0) {
-                    list.innerHTML = `<div class="empty-state"><i class="fas fa-receipt"></i><p>No transactions yet.</p></div>`;
-                } else {
-                    let expandedHistory = [];
+                const historyStr = JSON.stringify(data.history);
+                // Smart rendering: Update history list ONLY if new data has arrived to prevent scrolling bugs
+                if(lastHistoryData !== historyStr) {
+                    lastHistoryData = historyStr;
+                    const list = document.getElementById('historyList');
+                    list.innerHTML = '';
+                    
+                    if(data.history.length === 0) {
+                        list.innerHTML = `<div class="empty-state"><i class="fas fa-receipt"></i><p>No transactions yet.</p></div>`;
+                    } else {
+                        let expandedHistory = [];
+                        data.history.forEach(item => {
+                            let st = item.status ? item.status.toLowerCase() : '';
+                            let isFailedWithdrawal = (item.type === 'Withdrawal' && (st.includes('reject') || st.includes('reverse') || st.includes('fail') || st.includes('refund')));
 
-                    data.history.forEach(item => {
-                        let st = item.status ? item.status.toLowerCase() : '';
-                        let isFailedWithdrawal = (item.type === 'Withdrawal' && (st.includes('reject') || st.includes('reverse') || st.includes('fail') || st.includes('refund')));
+                            if (isFailedWithdrawal) {
+                                expandedHistory.push({ type: 'Withdrawal', amount: item.amount, date: item.date, status: item.status, remark: item.remark, isOriginalReject: true });
+                                expandedHistory.push({ type: 'Withdrawal Refunded', amount: item.amount, date: item.date, status: 'Refunded', remark: 'Amount credited back to wallet', isRefundRow: true });
+                            } else {
+                                expandedHistory.push(item);
+                            }
+                        });
 
-                        if (isFailedWithdrawal) {
-                            expandedHistory.push({ type: 'Withdrawal', amount: item.amount, date: item.date, status: item.status, remark: item.remark, isOriginalReject: true });
-                            expandedHistory.push({ type: 'Withdrawal Refunded', amount: item.amount, date: item.date, status: 'Refunded', remark: 'Amount credited back to wallet', isRefundRow: true });
-                        } else {
-                            expandedHistory.push(item);
-                        }
-                    });
+                        expandedHistory.sort((a, b) => {
+                            let diff = parseCustomDate(b.date) - parseCustomDate(a.date);
+                            if (diff === 0) {
+                                if (a.isRefundRow && !b.isRefundRow) return -1;
+                                if (!a.isRefundRow && b.isRefundRow) return 1;
+                            }
+                            return diff;
+                        });
 
-                    // GUARANTEE NEWEST FIRST
-                    expandedHistory.sort((a, b) => {
-                        let diff = parseCustomDate(b.date) - parseCustomDate(a.date);
-                        if (diff === 0) {
-                            if (a.isRefundRow && !b.isRefundRow) return -1;
-                            if (!a.isRefundRow && b.isRefundRow) return 1;
-                        }
-                        return diff;
-                    });
+                        expandedHistory.forEach(item => {
+                            let iconClass = '', colorClass = '', amtPrefix = '';
+                            let statusHtml = `<p>${item.date}</p>`;
+                            let displayType = item.type;
+                            let st = item.status ? item.status.toLowerCase() : '';
 
-                    expandedHistory.forEach(item => {
-                        let iconClass = '', colorClass = '', amtPrefix = '';
-                        let statusHtml = `<p>${item.date}</p>`;
-                        let displayType = item.type;
-                        let st = item.status ? item.status.toLowerCase() : '';
+                            if(item.type === 'Deposit' || item.type === 'Winning' || item.type === 'Referral' || item.type === 'Refund' || item.type === 'Withdrawal Refunded') { 
+                                iconClass = 'deposit fa-arrow-down'; colorClass = 'plus'; amtPrefix = '+'; 
+                            } else { 
+                                iconClass = 'withdraw fa-arrow-up'; colorClass = 'minus'; amtPrefix = '-'; 
+                            }
 
-                        if(item.type === 'Deposit' || item.type === 'Winning' || item.type === 'Referral' || item.type === 'Refund' || item.type === 'Withdrawal Refunded') { 
-                            iconClass = 'deposit fa-arrow-down'; colorClass = 'plus'; amtPrefix = '+'; 
-                        } else { 
-                            iconClass = 'withdraw fa-arrow-up'; colorClass = 'minus'; amtPrefix = '-'; 
-                        }
+                            if(st === 'pending') {
+                                statusHtml = `<span class="badge-status badge-pending">Pending</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                            } else if (item.isOriginalReject) {
+                                statusHtml = `<span class="badge-status badge-reject">${item.status}</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                                colorClass = 'neutral'; amtPrefix = ''; iconClass = 'reject fa-times'; 
+                            } else if (item.isRefundRow) {
+                                statusHtml = `<span class="badge-status" style="background:#ecfdf5; color:#10b981;">Refunded</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
+                            }
 
-                        if(st === 'pending') {
-                            statusHtml = `<span class="badge-status badge-pending">Pending</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
-                        } else if (item.isOriginalReject) {
-                            statusHtml = `<span class="badge-status badge-reject">${item.status}</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
-                            colorClass = 'neutral'; amtPrefix = ''; iconClass = 'reject fa-times'; 
-                        } else if (item.isRefundRow) {
-                            statusHtml = `<span class="badge-status" style="background:#ecfdf5; color:#10b981;">Refunded</span> <p style="display:inline; margin-left:5px;">${item.date}</p>`;
-                        }
+                            let remarkHtml = '';
+                            if (item.remark) {
+                                if (item.isRefundRow) { remarkHtml = `<br><span class="remark" style="background:#ecfdf5; color:#10b981;">${item.remark}</span>`; } 
+                                else { remarkHtml = `<br><span class="remark">Admin: ${item.remark}</span>`; }
+                            }
 
-                        let remarkHtml = '';
-                        if (item.remark) {
-                            if (item.isRefundRow) { remarkHtml = `<br><span class="remark" style="background:#ecfdf5; color:#10b981;">${item.remark}</span>`; } 
-                            else { remarkHtml = `<br><span class="remark">Admin: ${item.remark}</span>`; }
-                        }
-
-                        list.innerHTML += `
-                            <div class="h-item">
-                                <div class="h-icon ${iconClass}"><i class="fas ${iconClass.split(' ')[1]}"></i></div>
-                                <div class="h-details"><h4>${displayType}</h4>${statusHtml}${remarkHtml}</div>
-                                <div class="h-amount ${colorClass}"><h4>${amtPrefix}₹${item.amount}</h4></div>
-                            </div>`;
-                    });
+                            list.innerHTML += `
+                                <div class="h-item">
+                                    <div class="h-icon ${iconClass}"><i class="fas ${iconClass.split(' ')[1]}"></i></div>
+                                    <div class="h-details"><h4>${displayType}</h4>${statusHtml}${remarkHtml}</div>
+                                    <div class="h-amount ${colorClass}"><h4>${amtPrefix}₹${item.amount}</h4></div>
+                                </div>`;
+                        });
+                    }
                 }
             }
-        }).catch(err => { showLoader(false); console.error(err); });
+        }).catch(err => console.error(err));
     }
 
+    // Now returns a Promise and operates completely Silently
     function fetchReferralData() {
-        if(!currentUser) return;
-        fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getReferrals', 'uid': currentUser.uid}) })
+        if(!currentUser) return Promise.resolve();
+        return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getReferrals', 'uid': currentUser.uid}) })
         .then(res => res.json())
         .then(data => {
             if(data.status === 'success') {
                 document.getElementById('referralEarning').innerText = data.totalEarning || '0';
                 
-                const list = document.getElementById('referHistoryList');
-                list.innerHTML = '';
+                const refStr = JSON.stringify(data.history);
+                // Smart rendering check
+                if(lastReferralData !== refStr) {
+                    lastReferralData = refStr;
+                    const list = document.getElementById('referHistoryList');
+                    list.innerHTML = '';
 
-                if(!data.history || data.history.length === 0) {
-                    list.innerHTML = `<div class="empty-state"><i class="fas fa-users-slash"></i><p>No referrals yet.</p></div>`;
-                } else {
-                    // GUARANTEE NEWEST FIRST
-                    data.history.sort((a, b) => parseCustomDate(b.date) - parseCustomDate(a.date));
-                    
-                    data.history.forEach(item => {
-                        list.innerHTML += `
-                            <div class="h-item">
-                                <div class="h-icon refer"><i class="fas fa-user-check"></i></div>
-                                <div class="h-details"><h4>${item.userName} Joined</h4><p>Date: ${item.date}</p></div>
-                                <div class="h-amount plus"><h4>+₹${item.amount}</h4></div>
-                            </div>`;
-                    });
+                    if(!data.history || data.history.length === 0) {
+                        list.innerHTML = `<div class="empty-state"><i class="fas fa-users-slash"></i><p>No referrals yet.</p></div>`;
+                    } else {
+                        data.history.sort((a, b) => parseCustomDate(b.date) - parseCustomDate(a.date));
+                        data.history.forEach(item => {
+                            list.innerHTML += `
+                                <div class="h-item">
+                                    <div class="h-icon refer"><i class="fas fa-user-check"></i></div>
+                                    <div class="h-details"><h4>${item.userName} Joined</h4><p>Date: ${item.date}</p></div>
+                                    <div class="h-amount plus"><h4>+₹${item.amount}</h4></div>
+                                </div>`;
+                        });
+                    }
                 }
             }
         }).catch(err => console.error(err));
@@ -645,6 +710,7 @@
         }).catch(() => { showLoader(false); alert("Error connecting to server."); });
     }
 
+    // LOGIC UPDATE: Wait for ALL data to load before showing dashboard
     function loginUser() {
         const mobile = document.getElementById('loginMobile').value;
         const password = document.getElementById('loginPassword').value;
@@ -655,18 +721,31 @@
             method: 'POST',
             body: new URLSearchParams({'action': 'login', 'mobile': mobile, 'password': password})
         }).then(res => res.json()).then(data => {
-            showLoader(false);
             if(data.status === 'success') {
                 currentUser = data.user;
-                document.getElementById('authScreen').classList.add('hidden');
-                document.getElementById('mainApp').classList.remove('hidden');
-                document.getElementById('mainApp').style.display = 'flex'; 
-                
                 document.getElementById('userName').innerText = currentUser.name;
                 document.getElementById('userUID').innerText = currentUser.uid;
                 
-                loadSettings(); fetchWalletData();
-            } else { alert(data.message); }
+                // Wait for Settings, Wallet, Winners Banner AND Referral Data to finish loading completely
+                Promise.all([
+                    loadSettings(),
+                    fetchWalletData(),
+                    fetchWinners(), // Fetch Banner Data before opening App
+                    fetchReferralData() // Fetch Referral Data so amount doesn't stay 0 initially
+                ]).then(() => {
+                    // Hide loader and show the fully loaded app
+                    showLoader(false);
+                    document.getElementById('authScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    document.getElementById('mainApp').style.display = 'flex'; 
+                    
+                    // Start Live background syncing
+                    startAutoRefresh();
+                });
+            } else { 
+                showLoader(false);
+                alert(data.message); 
+            }
         }).catch(() => { showLoader(false); alert("Error connecting to server."); });
     }
 
@@ -717,6 +796,7 @@
     }
 
     function logout() {
+        clearInterval(autoRefreshInterval);
         currentUser = null; currentBalance = 0;
         document.getElementById('authScreen').classList.remove('hidden');
         document.getElementById('mainApp').classList.add('hidden');
