@@ -12,7 +12,7 @@
     
     <!-- FontAwesome & Google Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- PURE CSS FOR GUARANTEED LAYOUT -->
     <style>
@@ -48,69 +48,45 @@
         .auth-switch { text-align: center; margin-top: 25px; font-size: 14px; color: #6b7280; font-weight: 500; }
         .auth-switch span { color: #3b82f6; font-weight: 700; cursor: pointer; }
 
-        /* FLAT HEADER - HEIGHT REDUCED */
-        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 15px 20px 20px 20px; border-radius: 0; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
+        /* FLAT HEADER */
+        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 15px 20px 20px 20px; border-radius: 0; display: flex; justify-content: space-between; align-items: center; color: white; position: relative; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.05);}
         .user-profile { display: flex; align-items: center; gap: 12px; }
         .avatar { width: 42px; height: 42px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 18px; }
         .user-info p { font-size: 11px; color: #bfdbfe; font-weight: 500; }
-        .user-info h2 { font-size: 16px; font-weight: 700; margin: 2px 0; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .user-info h2 { font-size: 16px; font-weight: 700; margin: 2px 0; max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .uid-badge { background: rgba(0,0,0,0.2); padding: 3px 8px; border-radius: 10px; font-size: 10px; display: inline-block; }
         
-        .wallet-brief { background: rgba(255,255,255,0.15); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-align: right; cursor: pointer; backdrop-filter: blur(5px); }
-        .wallet-brief p { font-size: 11px; color: #bfdbfe; font-weight: 500; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
-        .wallet-brief h3 { font-size: 18px; font-weight: 800; margin-top: 2px; }
+        /* SIMPLE BOLD BALANCE PILL */
+        .balance-pill { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 8px 15px; border-radius: 12px; font-size: 18px; font-weight: 900; color: white; letter-spacing: 0.5px; backdrop-filter: blur(5px); }
 
-        /* HOME SCREEN & CARDS - PROPER SPACING & ALIGNMENT */
+        /* NEW: ROW FOR ADD MONEY & WITHDRAW (Updated for Transparent background and Gap) */
+        .action-buttons-row { display: flex; gap: 12px; padding: 0 20px; margin-top: 20px; background: transparent; position: relative; z-index: 9; }
+        .act-btn { flex: 1; padding: 13px; border-radius: 14px; font-size: 14px; font-weight: 800; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+        .act-btn:active { transform: scale(0.96); }
+        .btn-add { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; box-shadow: 0 4px 12px rgba(59,130,246,0.1); }
+        .btn-with { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; box-shadow: 0 4px 12px rgba(239,68,68,0.1); }
+
+        /* HOME SCREEN & CARDS */
         .screen-content { padding: 20px; position: relative; z-index: 20; }
         .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
         
-        /* INCREASED NOTIFICATION BANNER SIZE & SLOWER ANIMATION */
-        .winner-marquee {
-            background: linear-gradient(90deg, #ecfdf5, #d1fae5);
-            border: 1px solid #a7f3d0;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px; 
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 16px;
-            color: #047857;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 21;
-            overflow: hidden;
-            width: 100%;
-        }
+        .winner-marquee { background: linear-gradient(90deg, #ecfdf5, #d1fae5); border: 1px solid #a7f3d0; border-radius: 12px; padding: 18px 20px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; font-size: 16px; color: #047857; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 21; overflow: hidden; width: 100%; }
         .winner-marquee i { font-size: 24px; color: #10b981; flex-shrink: 0; }
         .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; display: flex; }
-        /* ANIMATION SPEED CHANGED TO 40s (Slower) */
         .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 40s linear infinite; font-weight: 500; white-space: nowrap; }
         .marquee-content strong { font-weight: 800; color: #064e3b; }
-        
-        @keyframes marquee-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
+        @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         /* COMPACT TOURNAMENT CARD */
         .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px; width: 100%; }
         .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        
         .t-header-left { display: flex; align-items: center; gap: 12px; }
         .t-header h3 { font-size: 20px; font-weight: 800; margin: 0; }
-        
-        .live-badge { 
-            background: white; color: #ea580c; padding: 5px 12px; border-radius: 20px; font-size: 11px; 
-            font-weight: 800; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-        }
+        .live-badge { background: white; color: #ea580c; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; }
-        
         .t-header i { font-size: 32px; opacity: 0.4; }
         
         .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 10px; font-size: 13px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        
         .t-body { padding: 20px; }
         .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .prize-info label, .fee-info label { font-size: 11px; color: #6b7280; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 4px;}
@@ -127,44 +103,20 @@
         .btn-join:active { transform: scale(0.98); }
         .btn-join:disabled { background: #9ca3af; cursor: not-allowed; box-shadow: none; }
 
-        /* WALLET & REFERRAL SCREENS */
-        .wallet-screen-padding { padding: 20px; }
-        
-        .balance-card-main { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-radius: 20px; padding: 20px; text-align: center; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 20px; position: relative; overflow: hidden; }
-        .balance-card-main.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
-        .balance-card-main i { position: absolute; right: -20px; bottom: -20px; font-size: 100px; opacity: 0.05; }
-        .balance-card-main p { font-size: 11px; color: #d1d5db; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; position: relative; z-index: 2;}
-        .balance-card-main h2 { font-size: 32px; font-weight: 900; position: relative; z-index: 2; word-break: break-all;}
+        /* FULL SCREEN OVERLAYS FOR DEPOSIT & WITHDRAW (Hide main elements behind it) */
+        .full-screen-overlay { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; height: 100dvh; background: #f3f4f6; z-index: 200; overflow-y: auto; padding-bottom: 30px; }
+        .fs-header { background: white; padding: 18px 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 210; }
+        .fs-header i { font-size: 20px; color: #111827; cursor: pointer; padding: 5px; }
+        .fs-header h2 { font-size: 18px; font-weight: 800; color: #111827; margin: 0; }
 
-        .tabs-container { display: flex; background: #e5e7eb; padding: 6px; border-radius: 16px; margin-bottom: 20px; }
-        .tab-btn { flex: 1; text-align: center; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #6b7280; cursor: pointer; transition: 0.3s; }
-        .tab-btn.active { background: white; color: #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-
-        .action-card { background: white; border-radius: 20px; padding: 25px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; margin-bottom: 25px; }
+        .action-card { background: white; border-radius: 20px; padding: 25px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #e5e7eb; margin-bottom: 25px; }
         
         /* HIGHLY VISIBLE UTR WARNING */
-        .utr-warning {
-            background: #fef2f2;
-            border: 2px dashed #ef4444;
-            border-radius: 12px;
-            padding: 12px 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
-            animation: pulse-border 2s infinite;
-        }
+        .utr-warning { background: #fef2f2; border: 2px dashed #ef4444; border-radius: 12px; padding: 12px 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); animation: pulse-border 2s infinite; }
         .utr-warning i { font-size: 24px; color: #ef4444; }
         .utr-warning p { font-size: 12.5px; color: #991b1b; font-weight: 700; line-height: 1.5; margin: 0; }
-        
-        @keyframes pulse-border {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
+        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
-        /* NEW DEPOSIT SECTION STYLES */
         .quick-amounts { display: flex; gap: 10px; margin-bottom: 20px; }
         .q-btn { flex: 1; text-align: center; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 10px 0; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(59,130,246,0.1); }
         .q-btn:active { transform: scale(0.95); }
@@ -175,13 +127,19 @@
         .p-method.active { border-color: #3b82f6; background: #eff6ff; color: #1d4ed8; }
         
         .utr-section { border-top: 2px dashed #e5e7eb; padding-top: 25px; margin-top: 10px; }
-
         .copy-box { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px 15px; border-radius: 10px; font-weight: 600; color: #111827; font-size: 13px; cursor: pointer; width: 100%; word-break: break-all; }
         .copy-box i { color: #3b82f6; font-size: 16px; }
         
         .info-alert { background: #fff7ed; border: 1px solid #ffedd5; padding: 15px; border-radius: 12px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
         .info-alert i { color: #f97316; font-size: 18px; margin-top: 2px; }
         .info-alert p { font-size: 12px; color: #9a3412; font-weight: 500; line-height: 1.5; }
+
+        /* REFERRAL EARNINGS CARD */
+        .balance-card-main { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-radius: 20px; padding: 20px; text-align: center; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 20px; position: relative; overflow: hidden; }
+        .balance-card-main.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .balance-card-main i { position: absolute; right: -20px; bottom: -20px; font-size: 100px; opacity: 0.05; }
+        .balance-card-main p { font-size: 11px; color: #d1d5db; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; position: relative; z-index: 2;}
+        .balance-card-main h2 { font-size: 32px; font-weight: 900; position: relative; z-index: 2; word-break: break-all;}
 
         /* HISTORY LISTS */
         .history-list { background: white; border-radius: 20px; padding: 10px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; min-height: 250px; }
@@ -212,7 +170,7 @@
 
         /* BOTTOM NAVIGATION */
         .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-top: 1px solid #f3f4f6; display: flex; justify-content: space-around; padding: 12px 0 15px; z-index: 100; box-shadow: 0 -5px 20px rgba(0,0,0,0.03); }
-        .nav-link { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #9ca3af; font-size: 10px; font-weight: 600; cursor: pointer; width: 20%; transition: 0.3s; }
+        .nav-link { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #9ca3af; font-size: 10px; font-weight: 600; cursor: pointer; width: 25%; transition: 0.3s; }
         .nav-link i { font-size: 20px; transition: 0.3s; }
         .nav-link.active { color: #3b82f6; }
         .nav-link.active i { transform: translateY(-4px); text-shadow: 0 4px 10px rgba(59,130,246,0.3); }
@@ -270,9 +228,20 @@
                     <span class="uid-badge">UID: <span id="userUID"></span></span>
                 </div>
             </div>
-            <div class="wallet-brief" onclick="switchTab('wallet')">
-                <p><i class="fas fa-wallet"></i> Balance</p>
-                <h3>₹<span id="headerBalance">0</span></h3>
+            
+            <!-- ONLY BOLD BALANCE PILL IN HEADER -->
+            <div class="balance-pill">
+                ₹<span id="headerBalance">0</span>
+            </div>
+        </div>
+
+        <!-- QUICK ACTIONS ROW (WITH GAP & TRANSPARENT BACKGROUND - SHOWS ONLY ON HOME) -->
+        <div class="action-buttons-row" id="quickActionsRow">
+            <div class="act-btn btn-add" onclick="openOverlay('depositScreen')">
+                <i class="fas fa-plus-circle"></i> Add Money
+            </div>
+            <div class="act-btn btn-with" onclick="openOverlay('withdrawScreen')">
+                <i class="fas fa-arrow-down"></i> Withdraw
             </div>
         </div>
 
@@ -329,77 +298,9 @@
 
         </div>
 
-        <!-- 3. WALLET SCREEN -->
-        <div id="walletScreen" class="hidden wallet-screen-padding">
-            
-            <div class="tabs-container">
-                <div class="tab-btn active" id="tabDeposit" onclick="switchWalletTab('deposit')">Add Funds</div>
-                <div class="tab-btn" id="tabWithdraw" onclick="switchWalletTab('withdraw')">Withdraw</div>
-            </div>
-
-            <!-- NAYA DEPOSIT SECTION -->
-            <div id="depositSection" class="action-card">
-                
-                <!-- NEW HIGHLIGHTED UTR INSTRUCTION BOX -->
-                <div class="utr-warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>पेमेंट करने के बाद 12 अंक का UTR नम्बर कॉपी करे और इस पेज पर नीचे में UTR बॉक्स में UTR नम्बर जरूर डालें अगर नहीं डालते है तो वॉलेट में पैसा नहीं आएगा।</p>
-                </div>
-
-                <div class="input-group">
-                    <i class="fas fa-rupee-sign" style="font-size: 18px; color: #111827;"></i>
-                    <input type="number" id="depAmount" placeholder="Enter Amount to Pay" class="form-input" style="font-size: 18px; font-weight: 700; color: #111827;">
-                </div>
-                
-                <div class="quick-amounts">
-                    <div class="q-btn" onclick="setAmount(50)">₹50</div>
-                    <div class="q-btn" onclick="setAmount(100)">₹100</div>
-                    <div class="q-btn" onclick="setAmount(200)">₹200</div>
-                    <div class="q-btn" onclick="setAmount(500)">₹500</div>
-                </div>
-
-                <p style="font-size: 13px; color: #4b5563; font-weight: 700; margin-bottom: 10px;">Select Payment App</p>
-                <div class="pay-methods">
-                    <div class="p-method active" id="appPaytm" onclick="selectPayApp('paytm')">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm
-                    </div>
-                    <div class="p-method" id="appPhonepe" onclick="selectPayApp('phonepe')">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" style="height:20px; max-width: none;"> PhonePe
-                    </div>
-                </div>
-
-                <button onclick="initiatePayment()" class="btn-primary" style="margin-bottom: 5px; font-size: 18px;">
-                    <i class="fas fa-paper-plane"></i> Pay Now
-                </button>
-
-                <!-- UTR SUBMISSION SECTION -->
-                <div class="utr-section">
-                    <p style="font-size: 13px; color: #374151; font-weight: 700; margin-bottom: 12px;">Payment done? Submit UTR here</p>
-                    <div class="info-alert" style="padding: 10px; margin-bottom: 15px;">
-                        <i class="fas fa-info-circle" style="font-size: 14px;"></i>
-                        <p style="font-size: 11px;">Make sure the amount above is correct before submitting the UTR.</p>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-hashtag"></i>
-                        <input type="text" id="depUTR" placeholder="Enter 12-digit UTR/Ref No." class="form-input">
-                    </div>
-                    <button onclick="submitDeposit()" class="btn-primary btn-success">
-                        <i class="fas fa-check-circle"></i> Submit Request
-                    </button>
-                </div>
-            </div>
-
-            <div id="withdrawSection" class="hidden action-card">
-                <div class="info-alert"><i class="fas fa-info-circle"></i><p>Money will be transferred to your provided UPI ID.</p></div>
-                <div class="input-group"><input type="number" id="withAmount" placeholder="Withdrawal Amount (₹)" class="form-input"></div>
-                <div class="input-group"><input type="text" id="withUPI" placeholder="Enter your UPI ID" class="form-input"></div>
-                <button onclick="submitWithdraw()" class="btn-primary btn-danger"><i class="fas fa-money-bill-wave"></i> Withdraw</button>
-            </div>
-        </div>
-
-        <!-- 4. REFERRAL SCREEN -->
-        <div id="referScreen" class="hidden wallet-screen-padding">
-            <div class="balance-card-main purple">
+        <!-- 3. REFERRAL SCREEN -->
+        <div id="referScreen" class="hidden screen-content">
+            <div class="balance-card-main purple" style="margin-top: 10px;">
                 <i class="fas fa-users"></i>
                 <p>Total Referral Earnings</p>
                 <h2>₹<span id="referralEarning">0</span></h2>
@@ -419,9 +320,9 @@
             </div>
         </div>
 
-        <!-- 5. HISTORY SCREEN -->
-        <div id="historyScreen" class="hidden wallet-screen-padding">
-            <h3 class="section-title" style="margin-top: 0;">Transaction History</h3>
+        <!-- 4. HISTORY SCREEN -->
+        <div id="historyScreen" class="hidden screen-content">
+            <h3 class="section-title" style="margin-top: 10px;">Transaction History</h3>
             <div class="history-list" id="historyList">
                 <div class="empty-state"><i class="fas fa-receipt"></i><p>Loading history...</p></div>
             </div>
@@ -430,10 +331,88 @@
         <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav">
             <div class="nav-link active" id="navHome" onclick="switchTab('home')"><i class="fas fa-layer-group"></i><span>Matches</span></div>
-            <div class="nav-link" id="navWallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Wallet</span></div>
             <div class="nav-link" id="navRefer" onclick="switchTab('refer')"><i class="fas fa-user-friends"></i><span>Refer</span></div>
             <div class="nav-link" id="navHistory" onclick="switchTab('history')"><i class="fas fa-file-invoice-dollar"></i><span>History</span></div>
             <div class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= FULL SCREEN OVERLAYS (HIDES MAIN LAYOUT) ================= -->
+
+<!-- ADD MONEY OVERLAY -->
+<div id="depositScreen" class="hidden full-screen-overlay">
+    <div class="fs-header">
+        <i class="fas fa-arrow-left" onclick="closeOverlay('depositScreen')"></i>
+        <h2>Add Money</h2>
+    </div>
+    
+    <div class="screen-content">
+        <div class="action-card" style="margin-top: 0;">
+            <!-- NEW HIGHLIGHTED UTR INSTRUCTION BOX -->
+            <div class="utr-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>पेमेंट करने के बाद 12 अंक का UTR नम्बर कॉपी करे और इस पेज पर नीचे में UTR बॉक्स में UTR नम्बर जरूर डालें अगर नहीं डालते है तो वॉलेट में पैसा नहीं आएगा।</p>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-rupee-sign" style="font-size: 18px; color: #111827;"></i>
+                <input type="number" id="depAmount" placeholder="Enter Amount to Pay" class="form-input" style="font-size: 18px; font-weight: 700; color: #111827;">
+            </div>
+            
+            <div class="quick-amounts">
+                <div class="q-btn" onclick="setAmount(50)">₹50</div>
+                <div class="q-btn" onclick="setAmount(100)">₹100</div>
+                <div class="q-btn" onclick="setAmount(200)">₹200</div>
+                <div class="q-btn" onclick="setAmount(500)">₹500</div>
+            </div>
+
+            <p style="font-size: 13px; color: #4b5563; font-weight: 700; margin-bottom: 10px;">Select Payment App</p>
+            <div class="pay-methods">
+                <div class="p-method active" id="appPaytm" onclick="selectPayApp('paytm')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm
+                </div>
+                <div class="p-method" id="appPhonepe" onclick="selectPayApp('phonepe')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" style="height:20px; max-width: none;"> PhonePe
+                </div>
+            </div>
+
+            <button onclick="initiatePayment()" class="btn-primary" style="margin-bottom: 5px; font-size: 18px;">
+                <i class="fas fa-paper-plane"></i> Pay Now
+            </button>
+
+            <!-- UTR SUBMISSION SECTION -->
+            <div class="utr-section">
+                <p style="font-size: 13px; color: #374151; font-weight: 700; margin-bottom: 12px;">Payment done? Submit UTR here</p>
+                <div class="info-alert" style="padding: 10px; margin-bottom: 15px;">
+                    <i class="fas fa-info-circle" style="font-size: 14px;"></i>
+                    <p style="font-size: 11px;">Make sure the amount above is correct before submitting the UTR.</p>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-hashtag"></i>
+                    <input type="text" id="depUTR" placeholder="Enter 12-digit UTR/Ref No." class="form-input">
+                </div>
+                <button onclick="submitDeposit()" class="btn-primary btn-success">
+                    <i class="fas fa-check-circle"></i> Submit Request
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WITHDRAW OVERLAY -->
+<div id="withdrawScreen" class="hidden full-screen-overlay">
+    <div class="fs-header">
+        <i class="fas fa-arrow-left" onclick="closeOverlay('withdrawScreen')"></i>
+        <h2>Withdraw Funds</h2>
+    </div>
+    
+    <div class="screen-content">
+        <div class="action-card" style="margin-top: 0;">
+            <div class="info-alert"><i class="fas fa-info-circle"></i><p>Money will be transferred to your provided UPI ID.</p></div>
+            <div class="input-group"><input type="number" id="withAmount" placeholder="Withdrawal Amount (₹)" class="form-input"></div>
+            <div class="input-group"><input type="text" id="withUPI" placeholder="Enter your UPI ID" class="form-input"></div>
+            <button onclick="submitWithdraw()" class="btn-primary btn-danger"><i class="fas fa-money-bill-wave"></i> Withdraw</button>
         </div>
     </div>
 </div>
@@ -473,27 +452,45 @@
         document.getElementById('registerForm').classList.toggle('hidden');
     }
 
+    // MAIN TAB NAVIGATION - Hides specific elements based on the active tab
     function switchTab(tab) {
-        ['homeScreen', 'walletScreen', 'referScreen', 'historyScreen'].forEach(id => document.getElementById(id).classList.add('hidden'));
-        ['navHome', 'navWallet', 'navRefer', 'navHistory'].forEach(id => document.getElementById(id).classList.remove('active'));
+        ['homeScreen', 'referScreen', 'historyScreen', 'quickActionsRow'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.classList.add('hidden');
+        });
+        
+        ['navHome', 'navRefer', 'navHistory'].forEach(id => document.getElementById(id).classList.remove('active'));
 
         if(tab === 'home') {
-            document.getElementById('homeScreen').classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); loadSettings();
-        } else if(tab === 'wallet') {
-            document.getElementById('walletScreen').classList.remove('hidden'); document.getElementById('navWallet').classList.add('active'); fetchWalletData();
+            document.getElementById('homeScreen').classList.remove('hidden'); 
+            document.getElementById('quickActionsRow').classList.remove('hidden'); // SHOW ONLY ON HOME
+            document.getElementById('navHome').classList.add('active'); 
+            loadSettings();
         } else if(tab === 'refer') {
-            document.getElementById('referScreen').classList.remove('hidden'); document.getElementById('navRefer').classList.add('active'); setupReferralLink(); fetchReferralData();
+            document.getElementById('referScreen').classList.remove('hidden'); 
+            document.getElementById('navRefer').classList.add('active'); 
+            setupReferralLink(); 
+            fetchReferralData();
         } else if(tab === 'history') {
-            document.getElementById('historyScreen').classList.remove('hidden'); document.getElementById('navHistory').classList.add('active'); fetchWalletData();
+            document.getElementById('historyScreen').classList.remove('hidden'); 
+            document.getElementById('navHistory').classList.add('active'); 
+            fetchWalletData();
         }
     }
 
-    function switchWalletTab(type) {
-        document.getElementById('depositSection').classList.add('hidden'); document.getElementById('withdrawSection').classList.add('hidden');
-        document.getElementById('tabDeposit').classList.remove('active'); document.getElementById('tabWithdraw').classList.remove('active');
+    // FULL SCREEN OVERLAY FUNCTIONS (For Deposit & Withdraw)
+    function openOverlay(id) {
+        document.getElementById(id).classList.remove('hidden');
+        
+        if (id === 'withdrawScreen' && currentUser) {
+            const savedUPI = localStorage.getItem('savedUserUPI_' + currentUser.uid);
+            if(savedUPI) document.getElementById('withUPI').value = savedUPI;
+        }
+        fetchWalletData();
+    }
 
-        if(type === 'deposit') { document.getElementById('depositSection').classList.remove('hidden'); document.getElementById('tabDeposit').classList.add('active'); } 
-        else { document.getElementById('withdrawSection').classList.remove('hidden'); document.getElementById('tabWithdraw').classList.add('active'); }
+    function closeOverlay(id) {
+        document.getElementById(id).classList.add('hidden');
     }
 
     function setAmount(amt) {
@@ -586,7 +583,6 @@
                     
                     marqueeEl.style.animation = 'none';
                     marqueeEl.offsetHeight; 
-                    // Animation Slower Check Done here too
                     marqueeEl.style.animation = 'marquee-scroll 40s linear infinite';
                 }
             } else if (!lastWinnersData) {
@@ -850,13 +846,22 @@
             body: new URLSearchParams({'action': 'withdraw', 'uid': currentUser.uid, 'amount': amount, 'upi': upi, 'currentBalance': currentBalance})
         }).then(res => res.json()).then(data => {
             showLoader(false); alert(data.message);
-            document.getElementById('withAmount').value = ''; document.getElementById('withUPI').value = ''; fetchWalletData();
+            
+            if(data.status === 'success') {
+                localStorage.setItem('savedUserUPI_' + currentUser.uid, upi);
+                document.getElementById('withAmount').value = ''; 
+                fetchWalletData();
+            }
         }).catch(() => { showLoader(false); alert("Error connecting to server."); });
     }
 
     function joinTournament() {
         if(currentTicketPrice === 0) { alert("Loading tournament details. Please wait."); return; }
-        if(currentBalance < currentTicketPrice) { alert(`Insufficient Balance! You need ₹${currentTicketPrice} to join.`); switchTab('wallet'); return; }
+        if(currentBalance < currentTicketPrice) { 
+            alert(`Insufficient Balance! You need ₹${currentTicketPrice} to join.`); 
+            openOverlay('depositScreen'); 
+            return; 
+        }
 
         if(!confirm(`Confirm joining Mega Draw for ₹${currentTicketPrice}?`)) return;
         
