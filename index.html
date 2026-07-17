@@ -64,13 +64,13 @@
         .screen-content { padding: 20px; position: relative; z-index: 20; }
         .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
         
-        /* INCREASED NOTIFICATION BANNER SIZE */
+        /* INCREASED NOTIFICATION BANNER SIZE & SLOWER ANIMATION */
         .winner-marquee {
             background: linear-gradient(90deg, #ecfdf5, #d1fae5);
             border: 1px solid #a7f3d0;
             border-radius: 12px;
             padding: 18px 20px;
-            margin-bottom: 25px; /* Extra space between banner and card */
+            margin-bottom: 25px; 
             display: flex;
             align-items: center;
             gap: 15px;
@@ -84,7 +84,8 @@
         }
         .winner-marquee i { font-size: 24px; color: #10b981; flex-shrink: 0; }
         .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; display: flex; }
-        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 20s linear infinite; font-weight: 500; white-space: nowrap; }
+        /* ANIMATION SPEED CHANGED TO 40s (Slower) */
+        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 40s linear infinite; font-weight: 500; white-space: nowrap; }
         .marquee-content strong { font-weight: 800; color: #064e3b; }
         
         @keyframes marquee-scroll {
@@ -96,22 +97,12 @@
         .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px; width: 100%; }
         .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
         
-        /* MEGA DRAW AND LIVE NOW IN ONE ROW */
         .t-header-left { display: flex; align-items: center; gap: 12px; }
         .t-header h3 { font-size: 20px; font-weight: 800; margin: 0; }
         
-        /* LIVE NOW CLEAR COLORS */
         .live-badge { 
-            background: white; 
-            color: #ea580c; 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            font-size: 11px; 
-            font-weight: 800; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px; 
-            letter-spacing: 0.5px; 
+            background: white; color: #ea580c; padding: 5px 12px; border-radius: 20px; font-size: 11px; 
+            font-weight: 800; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
         }
         .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; }
@@ -150,12 +141,40 @@
         .tab-btn.active { background: white; color: #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         .action-card { background: white; border-radius: 20px; padding: 25px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f3f4f6; margin-bottom: 25px; }
-        .upi-info-box { background: #eff6ff; border: 1px dashed #93c5fd; border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        .upi-info-box p { font-size: 12px; color: #4b5563; font-weight: 500; margin-bottom: 10px; }
         
-        .qr-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 15px; background: white; border-radius: 12px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; }
-        .qr-image { width: 100%; height: 100%; object-fit: contain; display: none; }
-        .qr-loader { width: 30px; height: 30px; border: 3px solid #e5e7eb; border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
+        /* HIGHLY VISIBLE UTR WARNING */
+        .utr-warning {
+            background: #fef2f2;
+            border: 2px dashed #ef4444;
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+            animation: pulse-border 2s infinite;
+        }
+        .utr-warning i { font-size: 24px; color: #ef4444; }
+        .utr-warning p { font-size: 12.5px; color: #991b1b; font-weight: 700; line-height: 1.5; margin: 0; }
+        
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* NEW DEPOSIT SECTION STYLES */
+        .quick-amounts { display: flex; gap: 10px; margin-bottom: 20px; }
+        .q-btn { flex: 1; text-align: center; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 10px 0; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(59,130,246,0.1); }
+        .q-btn:active { transform: scale(0.95); }
+        
+        .pay-methods { display: flex; gap: 12px; margin-bottom: 20px; }
+        .p-method { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border: 2px solid #e5e7eb; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; color: #4b5563; transition: 0.2s; background: #f9fafb;}
+        .p-method img { max-width: 24px; }
+        .p-method.active { border-color: #3b82f6; background: #eff6ff; color: #1d4ed8; }
+        
+        .utr-section { border-top: 2px dashed #e5e7eb; padding-top: 25px; margin-top: 10px; }
 
         .copy-box { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px 15px; border-radius: 10px; font-weight: 600; color: #111827; font-size: 13px; cursor: pointer; width: 100%; word-break: break-all; }
         .copy-box i { color: #3b82f6; font-size: 16px; }
@@ -238,10 +257,10 @@
         </div>
     </div>
 
-    <!-- MAIN APP CONTENT (Hidden till login) -->
+    <!-- MAIN APP CONTENT -->
     <div id="mainApp" class="hidden" style="flex: 1; flex-direction: column;">
         
-        <!-- FLAT Header (Height Reduced) -->
+        <!-- FLAT Header -->
         <div class="app-header" id="appHeader">
             <div class="user-profile">
                 <div class="avatar"><i class="fas fa-user text-white"></i></div>
@@ -257,10 +276,9 @@
             </div>
         </div>
 
-        <!-- 2. HOME SCREEN (MATCHES) -->
+        <!-- 2. HOME SCREEN -->
         <div id="homeScreen" class="screen-content">
             
-            <!-- NEW DYNAMIC SCROLLING BANNER (Size Increased) -->
             <div class="winner-marquee">
                 <i class="fas fa-gift"></i>
                 <div class="marquee-wrapper">
@@ -272,7 +290,6 @@
 
             <div class="tournament-card">
                 <div class="t-header">
-                    <!-- Mega Draw & Live Now in Single Row -->
                     <div class="t-header-left">
                         <h3>Mega Draw</h3>
                         <div class="live-badge"><div class="live-dot"></div> LIVE NOW</div>
@@ -320,18 +337,56 @@
                 <div class="tab-btn" id="tabWithdraw" onclick="switchWalletTab('withdraw')">Withdraw</div>
             </div>
 
+            <!-- NAYA DEPOSIT SECTION -->
             <div id="depositSection" class="action-card">
-                <div class="upi-info-box">
-                    <div class="qr-wrapper">
-                        <div class="qr-loader" id="qrLoader"></div>
-                        <img id="upiQRCode" class="qr-image" alt="UPI QR Code" onload="document.getElementById('qrLoader').style.display='none'; this.style.display='block';">
-                    </div>
-                    <p>Transfer exactly on this UPI ID</p>
-                    <div class="copy-box" onclick="copyUPI()"><span id="adminUPI">Loading...</span><i class="far fa-copy"></i></div>
+                
+                <!-- NEW HIGHLIGHTED UTR INSTRUCTION BOX -->
+                <div class="utr-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>पेमेंट करने के बाद 12 अंक का UTR नम्बर कॉपी करे और इस पेज पर नीचे में UTR बॉक्स में UTR नम्बर जरूर डालें अगर नहीं डालते है तो वॉलेट में पैसा नहीं आएगा।</p>
                 </div>
-                <div class="input-group"><input type="number" id="depAmount" placeholder="Amount to deposit (₹)" class="form-input"></div>
-                <div class="input-group"><input type="text" id="depUTR" placeholder="Enter 12-digit UTR No." class="form-input"></div>
-                <button onclick="submitDeposit()" class="btn-primary btn-success"><i class="fas fa-plus-circle"></i> Submit Request</button>
+
+                <div class="input-group">
+                    <i class="fas fa-rupee-sign" style="font-size: 18px; color: #111827;"></i>
+                    <input type="number" id="depAmount" placeholder="Enter Amount to Pay" class="form-input" style="font-size: 18px; font-weight: 700; color: #111827;">
+                </div>
+                
+                <div class="quick-amounts">
+                    <div class="q-btn" onclick="setAmount(50)">₹50</div>
+                    <div class="q-btn" onclick="setAmount(100)">₹100</div>
+                    <div class="q-btn" onclick="setAmount(200)">₹200</div>
+                    <div class="q-btn" onclick="setAmount(500)">₹500</div>
+                </div>
+
+                <p style="font-size: 13px; color: #4b5563; font-weight: 700; margin-bottom: 10px;">Select Payment App</p>
+                <div class="pay-methods">
+                    <div class="p-method active" id="appPaytm" onclick="selectPayApp('paytm')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm
+                    </div>
+                    <div class="p-method" id="appPhonepe" onclick="selectPayApp('phonepe')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" style="height:20px; max-width: none;"> PhonePe
+                    </div>
+                </div>
+
+                <button onclick="initiatePayment()" class="btn-primary" style="margin-bottom: 5px; font-size: 18px;">
+                    <i class="fas fa-paper-plane"></i> Pay Now
+                </button>
+
+                <!-- UTR SUBMISSION SECTION -->
+                <div class="utr-section">
+                    <p style="font-size: 13px; color: #374151; font-weight: 700; margin-bottom: 12px;">Payment done? Submit UTR here</p>
+                    <div class="info-alert" style="padding: 10px; margin-bottom: 15px;">
+                        <i class="fas fa-info-circle" style="font-size: 14px;"></i>
+                        <p style="font-size: 11px;">Make sure the amount above is correct before submitting the UTR.</p>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-hashtag"></i>
+                        <input type="text" id="depUTR" placeholder="Enter 12-digit UTR/Ref No." class="form-input">
+                    </div>
+                    <button onclick="submitDeposit()" class="btn-primary btn-success">
+                        <i class="fas fa-check-circle"></i> Submit Request
+                    </button>
+                </div>
             </div>
 
             <div id="withdrawSection" class="hidden action-card">
@@ -392,8 +447,10 @@
     let timerInterval = null;
     let autoRefreshInterval = null;
     
-    // State variables for avoiding flickering during auto-refresh
+    // Naye Payment variables
+    let selectedPayApp = 'paytm';
     let currentAdminUPI = "";
+    
     let currentTimerStr = "";
     let lastHistoryData = "";
     let lastReferralData = "";
@@ -439,7 +496,41 @@
         else { document.getElementById('withdrawSection').classList.remove('hidden'); document.getElementById('tabWithdraw').classList.add('active'); }
     }
 
-    function copyUPI() { navigator.clipboard.writeText(document.getElementById('adminUPI').innerText); alert("UPI ID Copied to Clipboard!"); }
+    function setAmount(amt) {
+        document.getElementById('depAmount').value = amt;
+    }
+
+    function selectPayApp(app) {
+        selectedPayApp = app;
+        document.getElementById('appPaytm').classList.remove('active');
+        document.getElementById('appPhonepe').classList.remove('active');
+        
+        if(app === 'paytm') document.getElementById('appPaytm').classList.add('active');
+        if(app === 'phonepe') document.getElementById('appPhonepe').classList.add('active');
+    }
+
+    function initiatePayment() {
+        const amt = document.getElementById('depAmount').value;
+        if(!amt || amt <= 0) { 
+            alert("Please enter a valid amount to pay."); 
+            return; 
+        }
+        if(!currentAdminUPI || currentAdminUPI === 'Contact Admin') {
+            alert("UPI ID is currently not available. Please wait or contact admin.");
+            return;
+        }
+
+        const upiString = `pa=${currentAdminUPI}&pn=CashwinAdmin&am=${amt}&cu=INR`;
+        let intentUrl = '';
+
+        if(selectedPayApp === 'paytm') {
+            intentUrl = `paytmmp://pay?${upiString}`;
+        } else if(selectedPayApp === 'phonepe') {
+            intentUrl = `phonepe://pay?${upiString}`;
+        }
+
+        window.location.href = intentUrl;
+    }
 
     function setupReferralLink() {
         if(currentUser) { document.getElementById('referLinkText').innerText = window.location.origin + window.location.pathname + "?ref=" + currentUser.uid; }
@@ -495,7 +586,8 @@
                     
                     marqueeEl.style.animation = 'none';
                     marqueeEl.offsetHeight; 
-                    marqueeEl.style.animation = 'marquee-scroll 20s linear infinite';
+                    // Animation Slower Check Done here too
+                    marqueeEl.style.animation = 'marquee-scroll 40s linear infinite';
                 }
             } else if (!lastWinnersData) {
                document.getElementById('marqueeText').innerHTML = "Join now and be the first winner! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -515,19 +607,7 @@
                 document.getElementById('ticketPrice').innerText = data.data['Lucky Draw Price'] || '--';
                 document.getElementById('participants').innerText = data.data['Participant'] || '--';
                 
-                const upiId = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
-                
-                if(currentAdminUPI !== upiId) {
-                    currentAdminUPI = upiId;
-                    document.getElementById('adminUPI').innerText = upiId;
-                    if(upiId !== 'Contact Admin') {
-                        const upiString = encodeURIComponent(`upi://pay?pa=${upiId}&pn=LuckyDrawAdmin`);
-                        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${upiString}`;
-                        document.getElementById('qrLoader').style.display = 'block';
-                        document.getElementById('upiQRCode').style.display = 'none';
-                        document.getElementById('upiQRCode').src = qrUrl;
-                    }
-                }
+                currentAdminUPI = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
 
                 currentTicketPrice = Number(data.data['Lucky Draw Price']);
                 let joined = data.currentJoined || 0;
@@ -746,7 +826,7 @@
     function submitDeposit() {
         const amount = document.getElementById('depAmount').value;
         const utr = document.getElementById('depUTR').value;
-        if(!amount || !utr) { alert("Please enter Amount and UTR Number."); return; }
+        if(!amount || !utr) { alert("Please enter both the paid Amount and 12-digit UTR Number."); return; }
 
         showLoader(true);
         fetch(SCRIPT_URL, {
