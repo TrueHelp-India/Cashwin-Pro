@@ -29,7 +29,7 @@
         .spinner { width: 45px; height: 45px; border: 4px solid #e5e7eb; border-top: 4px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* AUTH SCREEN (UPDATED: Top-Center Alignment) */
+        /* AUTH SCREEN */
         .auth-screen { padding: 12vh 25px 40px 25px; display: flex; flex-direction: column; justify-content: flex-start; flex: 1; background: white; min-height: 100vh; }
         .logo-box { text-align: center; margin-bottom: 40px; }
         .logo-icon { width: 75px; height: 75px; background: #eff6ff; border-radius: 20px; display: flex; justify-content: center; align-items: center; color: #3b82f6; font-size: 32px; margin: 0 auto 15px; box-shadow: 0 4px 15px rgba(59,130,246,0.1); }
@@ -48,33 +48,33 @@
         .auth-switch { text-align: center; margin-top: 25px; font-size: 14px; color: #6b7280; font-weight: 500; }
         .auth-switch span { color: #3b82f6; font-weight: 700; cursor: pointer; }
 
-        /* FLAT HEADER */
-        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 25px 20px 35px 20px; border-radius: 0; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
+        /* FLAT HEADER - HEIGHT REDUCED */
+        .app-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 15px 20px 20px 20px; border-radius: 0; display: flex; justify-content: space-between; align-items: flex-start; color: white; position: relative; z-index: 10; }
         .user-profile { display: flex; align-items: center; gap: 12px; }
-        .avatar { width: 46px; height: 46px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; }
-        .user-info p { font-size: 12px; color: #bfdbfe; font-weight: 500; }
-        .user-info h2 { font-size: 18px; font-weight: 700; margin: 2px 0; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .avatar { width: 42px; height: 42px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 18px; }
+        .user-info p { font-size: 11px; color: #bfdbfe; font-weight: 500; }
+        .user-info h2 { font-size: 16px; font-weight: 700; margin: 2px 0; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .uid-badge { background: rgba(0,0,0,0.2); padding: 3px 8px; border-radius: 10px; font-size: 10px; display: inline-block; }
         
-        .wallet-brief { background: rgba(255,255,255,0.15); padding: 10px 15px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.2); text-align: right; cursor: pointer; backdrop-filter: blur(5px); }
+        .wallet-brief { background: rgba(255,255,255,0.15); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-align: right; cursor: pointer; backdrop-filter: blur(5px); }
         .wallet-brief p { font-size: 11px; color: #bfdbfe; font-weight: 500; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
-        .wallet-brief h3 { font-size: 20px; font-weight: 800; margin-top: 2px; }
+        .wallet-brief h3 { font-size: 18px; font-weight: 800; margin-top: 2px; }
 
-        /* HOME SCREEN & CARDS */
-        .screen-content { padding: 0 20px; margin-top: -15px; position: relative; z-index: 20; }
+        /* HOME SCREEN & CARDS - PROPER SPACING & ALIGNMENT */
+        .screen-content { padding: 20px; position: relative; z-index: 20; }
         .section-title { font-size: 14px; font-weight: 700; color: #374151; text-transform: uppercase; margin: 30px 0 15px 5px; letter-spacing: 0.5px;}
         
-        /* NEW DYNAMIC SCROLLING NOTIFICATION BANNER */
+        /* INCREASED NOTIFICATION BANNER SIZE */
         .winner-marquee {
             background: linear-gradient(90deg, #ecfdf5, #d1fae5);
             border: 1px solid #a7f3d0;
             border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 20px;
+            padding: 18px 20px;
+            margin-bottom: 25px; /* Extra space between banner and card */
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 15px;
+            gap: 15px;
+            font-size: 16px;
             color: #047857;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             position: relative;
@@ -82,7 +82,7 @@
             overflow: hidden;
             width: 100%;
         }
-        .winner-marquee i { font-size: 20px; color: #10b981; flex-shrink: 0; }
+        .winner-marquee i { font-size: 24px; color: #10b981; flex-shrink: 0; }
         .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; display: flex; }
         .marquee-content { display: inline-block; padding-left: 100%; animation: marquee-scroll 20s linear infinite; font-weight: 500; white-space: nowrap; }
         .marquee-content strong { font-weight: 800; color: #064e3b; }
@@ -95,12 +95,30 @@
         /* COMPACT TOURNAMENT CARD */
         .tournament-card { background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e5e7eb; margin-bottom: 15px; width: 100%; }
         .t-header { background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%); padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .live-badge { background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.5px; }
-        .live-dot { width: 6px; height: 6px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 5px #ef4444; }
-        .t-header h3 { font-size: 20px; font-weight: 800; margin-top: 4px; }
+        
+        /* MEGA DRAW AND LIVE NOW IN ONE ROW */
+        .t-header-left { display: flex; align-items: center; gap: 12px; }
+        .t-header h3 { font-size: 20px; font-weight: 800; margin: 0; }
+        
+        /* LIVE NOW CLEAR COLORS */
+        .live-badge { 
+            background: white; 
+            color: #ea580c; 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            font-weight: 800; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            letter-spacing: 0.5px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; }
+        
         .t-header i { font-size: 32px; opacity: 0.4; }
         
-        .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 8px; font-size: 13px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .timer-box { background: #111827; color: #fcd34d; text-align: center; padding: 10px; font-size: 13px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 8px; }
         
         .t-body { padding: 20px; }
         .flex-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -223,7 +241,7 @@
     <!-- MAIN APP CONTENT (Hidden till login) -->
     <div id="mainApp" class="hidden" style="flex: 1; flex-direction: column;">
         
-        <!-- FLAT Header -->
+        <!-- FLAT Header (Height Reduced) -->
         <div class="app-header" id="appHeader">
             <div class="user-profile">
                 <div class="avatar"><i class="fas fa-user text-white"></i></div>
@@ -242,7 +260,7 @@
         <!-- 2. HOME SCREEN (MATCHES) -->
         <div id="homeScreen" class="screen-content">
             
-            <!-- NEW DYNAMIC SCROLLING BANNER -->
+            <!-- NEW DYNAMIC SCROLLING BANNER (Size Increased) -->
             <div class="winner-marquee">
                 <i class="fas fa-gift"></i>
                 <div class="marquee-wrapper">
@@ -254,9 +272,10 @@
 
             <div class="tournament-card">
                 <div class="t-header">
-                    <div>
-                        <div class="live-badge"><div class="live-dot"></div> LIVE NOW</div>
+                    <!-- Mega Draw & Live Now in Single Row -->
+                    <div class="t-header-left">
                         <h3>Mega Draw</h3>
+                        <div class="live-badge"><div class="live-dot"></div> LIVE NOW</div>
                     </div>
                     <i class="fas fa-gem"></i>
                 </div>
@@ -280,7 +299,7 @@
                     <div class="progress-box">
                         <div class="progress-labels">
                             <span>Joined: <span id="currentJoined">0</span></span>
-                            <span> Minimum Participants: <span id="participants">--</span></span>
+                            <span>Minimum participants: <span id="participants">--</span></span>
                         </div>
                         <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
                     </div>
@@ -295,12 +314,7 @@
 
         <!-- 3. WALLET SCREEN -->
         <div id="walletScreen" class="hidden wallet-screen-padding">
-            <div class="balance-card-main">
-                <i class="fas fa-wallet"></i>
-                <p>Total Available Balance</p>
-                <h2>₹<span id="walletBalance">0</span></h2>
-            </div>
-
+            
             <div class="tabs-container">
                 <div class="tab-btn active" id="tabDeposit" onclick="switchWalletTab('deposit')">Add Funds</div>
                 <div class="tab-btn" id="tabWithdraw" onclick="switchWalletTab('withdraw')">Withdraw</div>
@@ -383,7 +397,7 @@
     let currentTimerStr = "";
     let lastHistoryData = "";
     let lastReferralData = "";
-    let lastWinnersData = ""; // New state variable for Banner
+    let lastWinnersData = ""; 
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -406,9 +420,6 @@
         ['homeScreen', 'walletScreen', 'referScreen', 'historyScreen'].forEach(id => document.getElementById(id).classList.add('hidden'));
         ['navHome', 'navWallet', 'navRefer', 'navHistory'].forEach(id => document.getElementById(id).classList.remove('active'));
 
-        // Removed dynamic border-radius manipulation so header stays flat universally.
-
-        // Tab changes will now silently fetch data without showing the loader block
         if(tab === 'home') {
             document.getElementById('homeScreen').classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); loadSettings();
         } else if(tab === 'wallet') {
@@ -455,27 +466,24 @@
         return new Date(dateParts[2], dateParts[1]-1, dateParts[0], hours, mins).getTime();
     }
 
-    // BACKGROUND AUTO-REFRESH (Every 2.5 seconds)
     function startAutoRefresh() {
         clearInterval(autoRefreshInterval);
         autoRefreshInterval = setInterval(() => {
             if(currentUser) {
                 loadSettings();
                 fetchWalletData();
-                fetchWinners(); // Fetch for Banner
-                fetchReferralData(); // ALWAYS FETCH REFERRAL DATA IN BACKGROUND
+                fetchWinners(); 
+                fetchReferralData(); 
             }
         }, 2500); 
     }
 
-    // FETCH DYNAMIC WINNERS FOR BANNER
     function fetchWinners() {
         return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getRecentWinners'}) })
         .then(res => res.json())
         .then(data => {
             if(data.status === 'success' && data.data && data.data.length > 0) {
                 const winStr = JSON.stringify(data.data);
-                // Sirf tab update karo jab sheet me naya winner add hua ho
                 if(lastWinnersData !== winStr) {
                     lastWinnersData = winStr;
                     let marqueeHtml = "";
@@ -485,7 +493,6 @@
                     const marqueeEl = document.getElementById('marqueeText');
                     marqueeEl.innerHTML = marqueeHtml;
                     
-                    // Reset CSS animation softly so it continues nicely
                     marqueeEl.style.animation = 'none';
                     marqueeEl.offsetHeight; 
                     marqueeEl.style.animation = 'marquee-scroll 20s linear infinite';
@@ -499,7 +506,6 @@
         });
     }
 
-    // Now returns a Promise and operates completely Silently (No showLoader)
     function loadSettings() {
         return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getSettings'}) })
         .then(res => res.json())
@@ -511,7 +517,6 @@
                 
                 const upiId = data.data['ADMIN_UPI_ID'] || 'Contact Admin';
                 
-                // Only change QR if UPI ID changes (prevents flickering)
                 if(currentAdminUPI !== upiId) {
                     currentAdminUPI = upiId;
                     document.getElementById('adminUPI').innerText = upiId;
@@ -530,7 +535,6 @@
                 document.getElementById('currentJoined').innerText = joined;
                 document.getElementById('progFill').style.width = ((joined / total) * 100) + '%';
                 
-                // Only restart timer if backend timer string changes
                 if(currentTimerStr !== data.data['Timer']) {
                     currentTimerStr = data.data['Timer'];
                     startTimer(currentTimerStr);
@@ -573,7 +577,6 @@
         }, 1000);
     }
 
-    // Now returns a Promise and operates completely Silently
     function fetchWalletData() {
         if(!currentUser) return Promise.resolve();
         return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getWalletData', 'uid': currentUser.uid}) })
@@ -582,10 +585,8 @@
             if(data.status === 'success') {
                 currentBalance = data.balance;
                 document.getElementById('headerBalance').innerText = currentBalance;
-                document.getElementById('walletBalance').innerText = currentBalance;
                 
                 const historyStr = JSON.stringify(data.history);
-                // Smart rendering: Update history list ONLY if new data has arrived to prevent scrolling bugs
                 if(lastHistoryData !== historyStr) {
                     lastHistoryData = historyStr;
                     const list = document.getElementById('historyList');
@@ -656,7 +657,6 @@
         }).catch(err => console.error(err));
     }
 
-    // Now returns a Promise and operates completely Silently
     function fetchReferralData() {
         if(!currentUser) return Promise.resolve();
         return fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams({'action': 'getReferrals', 'uid': currentUser.uid}) })
@@ -666,7 +666,6 @@
                 document.getElementById('referralEarning').innerText = data.totalEarning || '0';
                 
                 const refStr = JSON.stringify(data.history);
-                // Smart rendering check
                 if(lastReferralData !== refStr) {
                     lastReferralData = refStr;
                     const list = document.getElementById('referHistoryList');
@@ -710,7 +709,6 @@
         }).catch(() => { showLoader(false); alert("Error connecting to server."); });
     }
 
-    // LOGIC UPDATE: Wait for ALL data to load before showing dashboard
     function loginUser() {
         const mobile = document.getElementById('loginMobile').value;
         const password = document.getElementById('loginPassword').value;
@@ -726,20 +724,16 @@
                 document.getElementById('userName').innerText = currentUser.name;
                 document.getElementById('userUID').innerText = currentUser.uid;
                 
-                // Wait for Settings, Wallet, Winners Banner AND Referral Data to finish loading completely
                 Promise.all([
                     loadSettings(),
                     fetchWalletData(),
-                    fetchWinners(), // Fetch Banner Data before opening App
-                    fetchReferralData() // Fetch Referral Data so amount doesn't stay 0 initially
+                    fetchWinners(), 
+                    fetchReferralData() 
                 ]).then(() => {
-                    // Hide loader and show the fully loaded app
                     showLoader(false);
                     document.getElementById('authScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
                     document.getElementById('mainApp').style.display = 'flex'; 
-                    
-                    // Start Live background syncing
                     startAutoRefresh();
                 });
             } else { 
